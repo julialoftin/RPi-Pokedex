@@ -139,6 +139,6 @@ def generations_menu():
 
 while True:
     if current_state == MAIN_MENU_STATE:
-        current_state = main_menu()
+        main_menu()
     elif current_state == GENERATIONS_MENU_STATE:
-        current_state = generations_menu()
+        generations_menu()
