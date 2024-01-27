@@ -50,6 +50,7 @@ draw_generation_i_list = ImageDraw.Draw(buffer_generation_i_list)
 MENU_STATE = 0
 POKEMON_LIST_STATE = 1
 GENERATION_I_STATE = 2
+GENERATION_I_MAIN_REGION_STATE = 2.1
 GENERATION_II_STATE = 3
 GENERATION_III_STATE = 4
 GENERATION_IV_STATE = 5
@@ -69,6 +70,7 @@ update_display = True
 start_index_menu = 0
 start_index_pokemon = 0
 start_index_generation_i = 0
+start_index_generation_i_main_region = 0
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
@@ -138,6 +140,24 @@ def update_generation_i_display(selected_generation_i_index):
     disp.image(buffer_generation_i_list)
     disp.show()
 
+def update_generation_i_main_region_display(selected_generation_i_main_region_index):
+    clear_buffer(buffer_menu, draw_menu)
+
+    display_count = 6
+
+    max_visible_items = min(display_count, total_regions - start_index_generation_i_main_region)
+
+    for i in range(max_visible_items):
+        region_name = main_region_data[start_index_generation_i_main_region + i]
+        display_text = f"{region_name}"
+
+        if i + start_index_generation_i_main_region == selected_generation_i_main_region_index:
+            display_text = f"# {display_text}"
+
+        draw_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_menu)
+    disp.show()
 
 while True:
     if current_state == MENU_STATE:
@@ -263,6 +283,12 @@ while True:
                 update_display = True
                 break
 
+            if not button_A.value:
+                if selected_menu_index == 0:
+                    current_state = GENERATION_I_MAIN_REGION_STATE
+                    update_display = True
+                    break
+
             # Looping display for end and beginning
 
             if selected_generation_i_index == 0:
@@ -276,3 +302,46 @@ while True:
                 update_display = True
 
         current_state = MENU_STATE
+
+    elif current_state == GENERATION_I_MAIN_REGION_STATE:
+        try:
+            response = requests.get(generation_i_api_url)
+
+            if response.status_code == 200:
+                main_region_data = response.json().get("main_region", [])
+                total_regions = len(main_region_data)
+                selected_generation_i_main_region_index = 0
+
+                while True:
+                    if update_display:
+                        update_generation_i_main_region_display(selected_generation_i_main_region_index)
+                        update_display = False
+
+                    if not button_U.value:
+                        selected_generation_i_main_region_index = (
+                            selected_generation_i_main_region_index - 1
+                        ) % total_regions  # Scroll down
+                        if selected_generation_i_main_region_index < 0:
+                            selected_generation_i_main_region_index = total_regions - 1
+                        update_display = True
+
+                    elif not button_D.value:
+                        selected_generation_i_main_region_index = (
+                            selected_generation_i_main_region_index + 1
+                        ) % total_regions  # Scroll down
+                        if selected_generation_i_main_region_index >= total_regions:
+                            selected_generation_i_main_region_index = 0
+                        update_display = True
+
+                    elif not button_B.value:
+                        current_state = GENERATION_I_STATE
+                        update_display = True
+                        break
+
+            else:
+                print(
+                    f"Failed to fetch Pokémon data. Status code: {response.status_code}"
+                )
+
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
