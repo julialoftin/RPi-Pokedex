@@ -53,7 +53,6 @@ POKEMON_LIST_STATE = 2
 POKEMON_DETAILS_STATE = 3
 
 current_state = MAIN_MENU_STATE
-update_display = True
 
 def fetch_data(api_url):
     try:
@@ -121,6 +120,6 @@ def generations_menu(disp):
 
 while True:
     if current_state == MAIN_MENU_STATE:
-        current_state = main_menu(disp)
+        current_state = main_menu()
     elif current_state == GENERATIONS_MENU_STATE:
-        current_state = generations_menu(disp)
+        current_state = generations_menu()
