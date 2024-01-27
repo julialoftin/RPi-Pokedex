@@ -261,6 +261,7 @@ while True:
             elif not button_B.value:
                 current_state = MENU_STATE
                 update_display = True
+                break
 
             # Looping display for end and beginning
 
@@ -273,3 +274,5 @@ while True:
                 start_index_generation_i = total_generation_i_items - 3
                 update_generation_i_display(selected_generation_i_index)
                 update_display = True
+
+        current_state = MENU_STATE
