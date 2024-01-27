@@ -63,4 +63,63 @@ def fetch_data(api_url):
 
     return []
 
-        
+def main_menu(disp):
+    buffer_menu, draw_menu = create_buffer_and_draw()
+    clear_buffer(buffer_menu, draw_menu)
+
+    draw_menu.text((0,0), "Main Menu:", fill=1)
+    menu_items = ["Generations", "Other Options"]
+    selected_menu_index = 0
+
+    while True:
+        for i, item in menu_items:
+            display_text = item
+
+            if i == selected_menu_index:
+                display_text = f"# {display_text}"
+
+            draw_menu.text((0, (i * 10) + 10), display_text, fill=1)
+        disp.image(buffer_menu)
+        disp.show()
+
+        if not button_U.value:
+            selected_menu_index = (selected_menu_index - 1) % len(menu_items) # Scroll Up
+        elif not button_D.value:
+            selected_menu_index = (selected_menu_index + 1) % len(menu_items) # Scroll Down
+        elif not button_A.value:
+            if selected_menu_index == 0:
+                return GENERATIONS_MENU_STATE
+            
+def generations_mennu(disp):
+    buffer_generations, draw_generations = create_buffer_and_draw()
+    clear_buffer(buffer_generations, draw_generations)
+
+    draw_generations.text((0, 0), "Generations Menu:", fill=1)
+    generation_data = fetch_data(generations_api_url)
+    total_generations = len(generation_data)
+    selected_generation_index = 0
+
+    while True:
+        for i in range(total_generations):
+            display_text = f"{generation_data[i]['name']}"
+
+            if i == selected_generation_index:
+                display_text = f"# {display_text}"
+
+            draw_generations.text((0, (i * 10) + 10), display_text, fill=1)
+
+        disp.image(buffer_generations)
+        disp.show()
+
+        if not button_U.value:
+            selected_generation_index = (selected_generation_index - 1) % total_generations
+        elif not button_D.value:
+            selected_generation_index = (selected_generation_index + 1) % total_generations
+        # elif not button_A.value:
+
+
+while True:
+    if current_state == MAIN_MENU_STATE:
+        current_state = main_menu(disp)
+    elif current_state == GENERATIONS_MENU_STATE:
+        current_state = generations_menu(disp)
