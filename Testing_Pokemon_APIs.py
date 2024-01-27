@@ -261,7 +261,6 @@ while True:
             elif not button_B.value:
                 current_state = MENU_STATE
                 update_display = True
-                break
 
             # Looping display for end and beginning
 
