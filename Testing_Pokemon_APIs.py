@@ -66,7 +66,7 @@ def fetch_data(api_url):
 
     return []
 
-def main_menu(disp):
+def main_menu():
     buffer_menu, draw_menu = create_buffer_and_draw()
     clear_buffer(buffer_menu, draw_menu)
 
@@ -92,7 +92,7 @@ def main_menu(disp):
             if selected_menu_index == 0:
                 return GENERATIONS_MENU_STATE
             
-def generations_menu(disp):
+def generations_menu():
     buffer_generations, draw_generations = create_buffer_and_draw()
     clear_buffer(buffer_generations, draw_generations)
 
