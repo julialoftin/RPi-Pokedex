@@ -72,7 +72,7 @@ def main_menu(disp):
     selected_menu_index = 0
 
     while True:
-        for i, item in menu_items:
+        for i, item in enumerate(menu_items):
             display_text = item
 
             if i == selected_menu_index:
