@@ -119,16 +119,19 @@ def generations_menu():
         if not button_U.value and selected_generation_index > 0:
             selected_generation_index -= 1
             time.sleep(0.2)
+            if start_index_generation > 0 and selected_generation_index == 0:
+                start_index_generation -= 1
         elif not button_D.value and selected_generation_index < display_count - 1:
             selected_generation_index += 1
             time.sleep(0.2)
+            if start_index_generation < total_generations - display_count and selected_generation_index == display_count - 1:
+                start_index_generation += 1
 
         # Handle scrolling the display by one item at a time
         if selected_generation_index == 0 and start_index_generation > 0:
             start_index_generation -= 1
         elif selected_generation_index == display_count - 1 and start_index_generation < total_generations - display_count:
             start_index_generation += 1
-
 
 while True:
     if current_state == MAIN_MENU_STATE:
