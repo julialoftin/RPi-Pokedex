@@ -90,7 +90,7 @@ def main_menu(disp):
             if selected_menu_index == 0:
                 return GENERATIONS_MENU_STATE
             
-def generations_mennu(disp):
+def generations_menu(disp):
     buffer_generations, draw_generations = create_buffer_and_draw()
     clear_buffer(buffer_generations, draw_generations)
 
