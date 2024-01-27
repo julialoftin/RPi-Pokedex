@@ -85,8 +85,10 @@ def main_menu():
         update_display(buffer_menu)
 
         if not button_U.value:
+            clear_buffer(buffer_menu, draw_menu)
             selected_menu_index = (selected_menu_index - 1) % len(menu_items) # Scroll Up
         elif not button_D.value:
+            clear_buffer(buffer_menu, draw_menu)
             selected_menu_index = (selected_menu_index + 1) % len(menu_items) # Scroll Down
         elif not button_A.value:
             if selected_menu_index == 0:
@@ -112,8 +114,10 @@ def generations_menu():
         update_display(buffer_generations)
 
         if not button_U.value:
+            clear_buffer(buffer_generations, draw_generations)
             selected_generation_index = (selected_generation_index - 1) % total_generations
         elif not button_D.value:
+            clear_buffer(buffer_generations, draw_generations)
             selected_generation_index = (selected_generation_index + 1) % total_generations
         # elif not button_A.value:
 
