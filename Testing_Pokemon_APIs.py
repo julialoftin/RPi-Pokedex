@@ -97,11 +97,18 @@ def generations_menu():
     generation_data = fetch_data(generations_api_url)
     total_generations = len(generation_data)
     selected_generation_index = 0
+    display_count = 5
+    start_index_generation = 0
 
     while True:
+        clear_buffer(buffer_generations, draw_generations)
         draw_generations.text((0, 0), "Generations Menu:", fill=1)
-        for i in range(total_generations):
-            display_text = f"{generation_data[i]['name']}"
+
+        max_visible_items = min(display_count, total_generations - start_index_generation)
+
+        for i in range(max_visible_items):
+            index = (start_index_generation + i) % total_generations
+            display_text = f"{generation_data[index]['name']}"
 
             if i == selected_generation_index:
                 display_text = f"# {display_text}"
@@ -110,12 +117,18 @@ def generations_menu():
         update_display(buffer_generations)
 
         if not button_U.value:
-            selected_generation_index = (selected_generation_index - 1) % total_generations
+            selected_generation_index = (selected_generation_index - 1) % display_count
             clear_buffer(buffer_generations, draw_generations)
         elif not button_D.value:
-            selected_generation_index = (selected_generation_index + 1) % total_generations
+            selected_generation_index = (selected_generation_index + 1) % display_count
             clear_buffer(buffer_generations, draw_generations)
         # elif not button_A.value:
+            
+        # Handle wrapping when reaching the end or beginning of the list
+        if selected_generation_index == 0 and start_index_generation > 0:
+            start_index_generation -= 1
+        elif selected_generation_index == display_count - 1 and start_index_generation < total_generations - display_count:
+            start_index_generation += 1
 
 
 while True:
