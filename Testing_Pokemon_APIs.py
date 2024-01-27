@@ -116,15 +116,14 @@ def generations_menu():
             draw_generations.text((0, (i * 10) + 10), display_text, fill=1)
         update_display(buffer_generations)
 
-        if not button_U.value:
-            selected_generation_index = (selected_generation_index - 1) % display_count
-            clear_buffer(buffer_generations, draw_generations)
-        elif not button_D.value:
-            selected_generation_index = (selected_generation_index + 1) % display_count
-            clear_buffer(buffer_generations, draw_generations)
-        # elif not button_A.value:
-            
-        # Handle wrapping when reaching the end or beginning of the list
+        if not button_U.value and selected_generation_index > 0:
+            selected_generation_index -= 1
+            time.sleep(0.2)
+        elif not button_D.value and selected_generation_index < display_count - 1:
+            selected_generation_index += 1
+            time.sleep(0.2)
+
+        # Handle scrolling the display by one item at a time
         if selected_generation_index == 0 and start_index_generation > 0:
             start_index_generation -= 1
         elif selected_generation_index == display_count - 1 and start_index_generation < total_generations - display_count:
