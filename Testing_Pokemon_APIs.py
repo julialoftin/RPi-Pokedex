@@ -124,7 +124,8 @@ def update_pokemon_display(selected_pokemon_index):
 def update_generation_i_display(selected_generation_i_index):
     clear_buffer(buffer_generation_i_list, draw_generation_i_list)
 
-    generation_i_items = ["Pokemon", "Types", "Moves"]
+    # generation_i_items = ["Pokemon", "Types", "Moves"]
+    generation_i_items = ["Main Region", "Moves", "Pokemon Species", "Types", "Versions"]
 
     for i, item in enumerate(generation_i_items):
         display_text = item
