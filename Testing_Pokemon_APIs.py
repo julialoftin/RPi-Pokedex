@@ -42,6 +42,10 @@ def create_buffer_and_draw():
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
 
+def update_display(buffer):
+    disp.image(buffer)
+    disp.show()
+
 # Define states
 MAIN_MENU_STATE = 0
 GENERATIONS_MENU_STATE = 1
@@ -79,8 +83,7 @@ def main_menu(disp):
                 display_text = f"# {display_text}"
 
             draw_menu.text((0, (i * 10) + 10), display_text, fill=1)
-        disp.image(buffer_menu)
-        disp.show()
+        update_display(buffer_menu)
 
         if not button_U.value:
             selected_menu_index = (selected_menu_index - 1) % len(menu_items) # Scroll Up
@@ -107,9 +110,7 @@ def generations_menu(disp):
                 display_text = f"# {display_text}"
 
             draw_generations.text((0, (i * 10) + 10), display_text, fill=1)
-
-        disp.image(buffer_generations)
-        disp.show()
+        update_display(buffer_generations)
 
         if not button_U.value:
             selected_generation_index = (selected_generation_index - 1) % total_generations
