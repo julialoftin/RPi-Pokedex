@@ -284,8 +284,9 @@ while True:
                 break
 
             if not button_A.value:
-                if selected_menu_index == 0:
+                if selected_generation_i_index == 0:
                     current_state = GENERATION_I_MAIN_REGION_STATE
+                    start_index_generation_i_main_region = 0
                     update_display = True
                     break
 
