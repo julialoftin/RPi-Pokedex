@@ -27,7 +27,7 @@ button_U.pull = Pull.UP
 
 button_D = DigitalInOut(board.D22)
 button_D.direction = Direction.INPUT
-button_D.pull = Pull.U
+button_D.pull = Pull.UP
 
 # API Requests
 pokemon_api_url = "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
