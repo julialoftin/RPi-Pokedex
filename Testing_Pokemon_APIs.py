@@ -175,6 +175,20 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
     disp.image(buffer_generation_i_moves)
     disp.show()
 
+def fetch_main_region():
+    try:
+        response = requests.get(generation_i_api_url)
+        if response.status_code == 200:
+            main_region_data = response.json().get("main_region", {}).get("name", "")
+            total_regions = len(main_region_data)
+            selected_generation_i_main_region_index = 0
+            current_state = GENERATION_I_MAIN_REGION_STATE
+            update_display = True
+            print("Transitioning to GENERATION_I_MAIN_REGION_STATE")
+        else:
+            print(f"Failed to fetch main region data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
 
 while True:
     if current_state == MENU_STATE:
@@ -256,19 +270,7 @@ while True:
             if not button_A.value:
                 if selected_generation_i_index == 0:
                     print(f"Selected Index: {selected_generation_i_index}")
-                    try:
-                        response = requests.get(generation_i_api_url)
-                        if response.status_code == 200:
-                            main_region_data = response.json().get("main_region", {}).get("name", "")
-                            total_regions = len(main_region_data)
-                            selected_generation_i_main_region_index = 0
-                            current_state = GENERATION_I_MAIN_REGION_STATE
-                            update_display = True
-                            print("Transitioning to GENERATION_I_MAIN_REGION_STATE")
-                        else:
-                            print(f"Failed to fetch main region data. Status code: {response.status_code}")
-                    except requests.exceptions.RequestException as e:
-                        print(f"An error occurred: {e}")
+                    fetch_main_region()
                 elif selected_generation_i_index == 1:
                     print(f"Selected Index: {selected_generation_i_index}")
                     try:
@@ -312,6 +314,7 @@ while True:
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
         selected_generation_i_main_region_index = 0
+        total_regions 
         while True:
 
             if update_display:
