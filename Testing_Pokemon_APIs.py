@@ -48,7 +48,7 @@ draw_generation_i_list = ImageDraw.Draw(buffer_generation_i_list)
 
 # Create an off-screen buffer and drawing object for Generation I Main Region List
 buffer_generation_i_main_region = Image.new("1", (disp.width, disp.height))
-draw_generation_i_main_region = ImageDraw.Draw(buffer_generation_i_list)
+draw_generation_i_main_region = ImageDraw.Draw(buffer_generation_i_main_region)
 
 # Define states
 MENU_STATE = 0
