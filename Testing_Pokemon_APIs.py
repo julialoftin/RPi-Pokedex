@@ -203,7 +203,7 @@ def update_generation_i_pokemon_species_display(selected_generation_i_pokemon_sp
         try:
             pokemon_species_item = pokemon_species_data[start_index_generation_i_pokemon_species + i]
             pokemon_species_name = pokemon_species_item.get("name", "")
-            display_text = f"# {pokemon_species_name}"
+            display_text = f"{pokemon_species_name}"
 
             if i + start_index_generation_i_pokemon_species == selected_generation_i_pokemon_species_index:
                 display_text = f"# {display_text}"
