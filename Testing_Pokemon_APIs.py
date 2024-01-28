@@ -162,7 +162,7 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
         try:
             move_data = moves_data[start_index_generation_i_moves + i]
             move_name = move_data.get("name", "")
-            display_text = f"{moves_name}"
+            display_text = f"{move_name}"
 
             if i + start_index_generation_i_moves == selected_generation_i_moves_index:
                 display_text = f"# {display_text}"
