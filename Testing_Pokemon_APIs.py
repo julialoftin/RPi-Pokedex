@@ -83,6 +83,7 @@ start_index_generation_i_pokemon_species = 0
 
 total_regions = 0
 selected_generation_i_main_region_index = 0
+selected_generation_i_pokemon_species_index = 0
 main_region_data = []
 
 def clear_buffer(buffer, draw):
