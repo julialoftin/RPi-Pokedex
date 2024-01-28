@@ -152,13 +152,16 @@ def update_generation_i_main_region_display(selected_generation_i_main_region_in
     max_visible_items = min(display_count, total_regions - start_index_generation_i_main_region)
 
     for i in range(max_visible_items):
-        region_name = main_region_data[start_index_generation_i_main_region + i]["name"]
-        display_text = f"{region_name}"
+        try:
+            region_name = main_region_data["main_region"]["name"]
+            display_text = f"{region_name}"
 
-        if i + start_index_generation_i_main_region == selected_generation_i_main_region_index:
-            display_text = f"# {display_text}"
+            if i + start_index_generation_i_main_region == selected_generation_i_main_region_index:
+                display_text = f"# {display_text}"
 
-        draw_generation_i_main_region.text((0, (i * 10) + 10), display_text, fill=1)
+            draw_generation_i_main_region.text((0, (i * 10) + 10), display_text, fill=1)
+        except KeyError as e:
+            print(f"KeyError: {e}, main_region_data: {main_region_data}")
 
     disp.image(buffer_menu)
     disp.show()
