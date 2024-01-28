@@ -149,7 +149,7 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
     clear_buffer(buffer_generation_i_moves, draw_generation_i_moves)
     draw_generation_i_moves.text((0, 0), "Moves:", fill=1)
 
-    display_count = 6
+    display_count = 5
     max_visible_items = min(display_count, total_moves - start_index_generation_i_moves)
 
     # Handle wrapping when reaching the end or beginning of the list
