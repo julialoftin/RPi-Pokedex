@@ -63,19 +63,19 @@ def update_display_main_menu(selected_index_main_menu):
 
     disp.image(buffer_main_menu)
     disp.show()
-    return main_menu_items
-
 
 while True:
 
     if current_state == MAIN_MENU_STATE:
         selected_index_main_menu = 0
-        main_menu_items_length = len(update_display_main_menu(selected_index_main_menu))
+        total_main_menu_items = 3
+        update_display_main_menu(selected_index_main_menu)
 
         if not button_U.value:
-            selected_index_main_menu = (selected_index_main_menu - 1) % main_menu_items_length # Scroll Down
+            selected_index_main_menu = (selected_index_main_menu - 1) % total_main_menu_items # Scroll Up
             if selected_index_main_menu < start_index_menu:
                 start_index_menu = selected_index_main_menu
+            
             update_display_main_menu(selected_index_main_menu)
 
         # if selected_index_main_menu == 0:
