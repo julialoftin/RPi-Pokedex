@@ -292,7 +292,6 @@ while True:
                 break
 
             if not button_A.value:
-                print(f"Selected Index: {selected_generation_i_index}")
                 if selected_generation_i_index == 0:
                     print(f"Selected Index: {selected_generation_i_index}")
                     try:
