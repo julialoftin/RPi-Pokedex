@@ -383,6 +383,11 @@ while True:
                 update_display = True
                 break
 
+            elif not button_A.value and selected_generation_i_pokemon_species_index == 0:
+                current_state = GENERATION_I_POKEMON_SPECIES_STATE
+                update_display = True
+                break
+
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
         selected_generation_i_main_region_index = 0
