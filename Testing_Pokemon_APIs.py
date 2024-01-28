@@ -292,7 +292,9 @@ while True:
                 break
 
             if not button_A.value:
+                print(f"Selected Index: {selected_generation_i_index}")
                 if selected_generation_i_index == 0:
+                    print(f"Selected Index: {selected_generation_i_index}")
                     try:
                         response = requests.get(generation_i_api_url)
                         if response.status_code == 200:
