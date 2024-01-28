@@ -76,3 +76,11 @@ while True:
             selected_index_main_menu = (selected_index_main_menu - 1) % main_menu_items_length # Scroll Down
             if selected_index_main_menu < 0:
                 selected_index_main_menu = main_menu_items_length - 1
+
+        if selected_index_main_menu == 0:
+            start_index_menu = 0
+            update_display_main_menu(selected_index_main_menu)
+
+        if selected_index_main_menu == main_menu_items_length - 1:
+            start_index_menu = main_menu_items_length - 3
+            update_display_main_menu(selected_index_main_menu)
