@@ -357,7 +357,7 @@ while True:
     elif current_state == GENERATION_I_MOVES_STATE:
         print(f"In GENERATION_I_MOVES_STATE")
         selected_generation_i_moves_index = 0
-        total_moves = fetch_generation_1_moves
+        total_moves = fetch_generation_1_moves()
         while True:
 
             if update_display:
