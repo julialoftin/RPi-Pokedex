@@ -154,6 +154,7 @@ def update_generation_i_main_region_display(selected_generation_i_main_region_in
     for i in range(max_visible_items):
         try:
             region_data = main_region_data.get("main_region", {})
+            print(f"{main_region_data}")
             region_name = region_data.get("name", "")
             display_text = f"{region_name}"
 
