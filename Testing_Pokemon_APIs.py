@@ -45,10 +45,15 @@ draw_generation_i_list = ImageDraw.Draw(buffer_generation_i_list)
 buffer_generation_i_main_region = Image.new("1", (disp.width, disp.height))
 draw_generation_i_main_region = ImageDraw.Draw(buffer_generation_i_main_region)
 
+# Create an off-screen buffer and drawing object for Generation I Moves List
+buffer_generation_i_moves = Image.new("1", (disp.width, disp.height))
+draw_generation_i_moves = ImageDraw.Draw(buffer_generation_i_moves)
+
 # Define states
 MENU_STATE = 0
 GENERATION_I_STATE = 2
 GENERATION_I_MAIN_REGION_STATE = 11
+GENERATION_I_MOVES_STATE = 12
 GENERATION_II_STATE = 3
 GENERATION_III_STATE = 4
 GENERATION_IV_STATE = 5
@@ -68,6 +73,11 @@ update_display = True
 start_index_menu = 0
 start_index_generation_i = 0
 start_index_generation_i_main_region = 0
+start_index_generation_i_moves = 0
+
+total_regions = 0
+selected_generation_i_main_region_index = 0
+main_region_data = []
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
@@ -102,7 +112,6 @@ def update_menu_display(selected_menu_index):
 def update_generation_i_display(selected_generation_i_index):
     clear_buffer(buffer_generation_i_list, draw_generation_i_list)
 
-    # generation_i_items = ["Pokemon", "Types", "Moves"]
     generation_i_items = ["Main Region", "Moves", "Pokemon Species", "Types", "Versions"]
 
     for i, item in enumerate(generation_i_items):
@@ -117,6 +126,7 @@ def update_generation_i_display(selected_generation_i_index):
     disp.show()
 
 def update_generation_i_main_region_display(selected_generation_i_main_region_index):
+    global start_index_generation_i_main_region
     clear_buffer(buffer_generation_i_main_region, draw_generation_i_main_region)
 
     display_count = 1
@@ -125,7 +135,7 @@ def update_generation_i_main_region_display(selected_generation_i_main_region_in
 
     for i in range(max_visible_items):
         try:
-            region_data = main_region_data
+            region_data = main_region_data[start_index_generation_i_main_region + i]
             region_name = region_data.get("name", "")
             display_text = f"{region_name}"
 
@@ -138,6 +148,74 @@ def update_generation_i_main_region_display(selected_generation_i_main_region_in
 
     disp.image(buffer_generation_i_main_region)
     disp.show()
+
+def update_generation_i_moves_display(selected_generation_i_moves_index):
+    global start_index_generation_i_moves
+    clear_buffer(buffer_generation_i_moves, draw_generation_i_moves)
+    draw_generation_i_moves.text((0, 0), "Moves:", fill=1)
+
+    display_count = 5
+    max_visible_items = min(display_count, total_moves - start_index_generation_i_moves)
+
+    # Handle wrapping when reaching the end or beginning of the list
+    if selected_generation_i_moves_index < start_index_generation_i_moves:
+        start_index_generation_i_moves = selected_generation_i_moves_index
+    elif selected_generation_i_moves_index >= start_index_generation_i_moves + max_visible_items:
+        start_index_generation_i_moves = selected_generation_i_moves_index - max_visible_items + 1
+
+    for i in range(max_visible_items):
+        try:
+            move_data = moves_data[start_index_generation_i_moves + i]
+            move_name = move_data.get("name", "")
+            display_text = f"{move_name}"
+
+            if i + start_index_generation_i_moves == selected_generation_i_moves_index:
+                display_text = f"# {display_text}"
+
+            draw_generation_i_moves.text((0, (i * 10) + 10), display_text, fill=1)
+        except KeyError as e:
+            print(f"KeyError: {e}, moves_data: {moves_data}")
+
+    disp.image(buffer_generation_i_moves)
+    disp.show()
+
+def fetch_generation_i_main_region():
+    global total_regions, main_region_data, selected_generation_i_main_region_index, current_state, update_display
+    try:
+        response = requests.get(generation_i_api_url)
+        if response.status_code == 200:
+            data = response.json()
+            main_region_data = [data["main_region"]]
+            total_regions = len(main_region_data)
+            selected_generation_i_main_region_index = 0
+            current_state = GENERATION_I_MAIN_REGION_STATE
+            update_display = True
+            print("Transitioning to GENERATION_I_MAIN_REGION_STATE")
+            return total_regions
+        else:
+            print(f"Failed to fetch main region data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+def fetch_generation_1_moves():
+    global moves_data, total_moves, selected_generation_i_moves_index, current_state, update_display
+    try:
+        response = requests.get(generation_i_api_url)
+        if response.status_code == 200:
+            moves_data = response.json().get("moves", [])
+            if moves_data:
+                total_moves = len(moves_data)
+                selected_generation_i_moves_index = 0
+                current_state = GENERATION_I_MOVES_STATE
+                update_display = True
+                print(f"Transitioning to GENERATION_I_MOVES_STATE")
+                return total_moves
+            else:
+                print(f"Moves data is empty.")
+        else:
+            print(f"Failed to fetch moves data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
 
 while True:
     if current_state == MENU_STATE:
@@ -185,6 +263,7 @@ while True:
 
     elif current_state == GENERATION_I_STATE:
         selected_generation_i_index = 0
+        selected_generation_i_moves_index = 0
         total_generation_i_items = 5
 
         update_generation_i_display(selected_generation_i_index)
@@ -218,22 +297,12 @@ while True:
             if not button_A.value:
                 if selected_generation_i_index == 0:
                     print(f"Selected Index: {selected_generation_i_index}")
-                    try:
-                        response = requests.get(generation_i_api_url)
-                        if response.status_code == 200:
-                            main_region_data = response.json().get("main_region", {}).get("name", "")
-                            total_regions = len(main_region_data)
-                            selected_generation_i_main_region_index = 0
-                            current_state = GENERATION_I_MAIN_REGION_STATE
-                            update_display = True
-                            print("Transitioning to GENERATION_I_MAIN_REGION_STATE")
-                        else:
-                            print(f"Failed to fetch main region data. Status code: {response.status_code}")
-                    except requests.exceptions.RequestException as e:
-                        print(f"An error occurred: {e}")
+                    fetch_generation_i_main_region()
+                elif selected_generation_i_index == 1:
+                    print(f"Selected Index: {selected_generation_i_index}")
+                    fetch_generation_1_moves()
 
             # Looping display for end and beginning
-
             if selected_generation_i_index == 0:
                 start_index_generation_i = 0
                 update_generation_i_display(selected_generation_i_index)
@@ -249,46 +318,69 @@ while True:
                 update_display = True
                 break
 
+            elif not button_A.value and selected_generation_i_moves_index == 0:
+                current_state = GENERATION_I_MOVES_STATE
+                update_display = True
+                break
+
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
-        try:
-            response = requests.get(generation_i_api_url)
+        selected_generation_i_main_region_index = 0
+        total_regions = fetch_generation_i_main_region()
+        while True:
+                
+            if update_display:
+                update_generation_i_main_region_display(selected_generation_i_main_region_index)
+                update_display = False
 
-            if response.status_code == 200:
-                main_region_data = response.json().get("main_region", [])
-                total_regions = len(main_region_data)
-                selected_generation_i_main_region_index = 0
+            if not button_U.value:
+                selected_generation_i_main_region_index = (
+                    selected_generation_i_main_region_index - 1
+                ) % total_regions  # Scroll down
+                if selected_generation_i_main_region_index < 0:
+                    selected_generation_i_main_region_index = total_regions - 1
+                update_display = True
 
-                while True:
-                    if update_display:
-                        update_generation_i_main_region_display(selected_generation_i_main_region_index)
-                        update_display = False
+            elif not button_D.value:
+                selected_generation_i_main_region_index = (
+                    selected_generation_i_main_region_index + 1
+                ) % total_regions  # Scroll down
+                if selected_generation_i_main_region_index >= total_regions:
+                    selected_generation_i_main_region_index = 0
+                update_display = True
 
-                    if not button_U.value:
-                        selected_generation_i_main_region_index = (
-                            selected_generation_i_main_region_index - 1
-                        ) % total_regions  # Scroll down
-                        if selected_generation_i_main_region_index < 0:
-                            selected_generation_i_main_region_index = total_regions - 1
-                        update_display = True
+            elif not button_B.value:
+                current_state = GENERATION_I_STATE
+                update_display = True
+                break
 
-                    elif not button_D.value:
-                        selected_generation_i_main_region_index = (
-                            selected_generation_i_main_region_index + 1
-                        ) % total_regions  # Scroll down
-                        if selected_generation_i_main_region_index >= total_regions:
-                            selected_generation_i_main_region_index = 0
-                        update_display = True
+    elif current_state == GENERATION_I_MOVES_STATE:
+        print(f"In GENERATION_I_MOVES_STATE")
+        selected_generation_i_moves_index = 0
+        total_moves = fetch_generation_1_moves()
+        while True:
 
-                    elif not button_B.value:
-                        current_state = GENERATION_I_STATE
-                        update_display = True
-                        break
+            if update_display:
+                update_generation_i_moves_display(selected_generation_i_moves_index)
+                update_display = False
 
-            else:
-                print(
-                    f"Failed to fetch Pokémon data. Status code: {response.status_code}"
-                )
+            if not button_U.value:
+                selected_generation_i_moves_index = (
+                    selected_generation_i_moves_index - 1
+                ) % total_moves # Scroll up
+                if selected_generation_i_moves_index < 0:
+                    selected_generation_i_moves_index = total_moves - 1
+                update_display = True
 
-        except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
+            elif not button_D.value:
+                selected_generation_i_moves_index = (
+                    selected_generation_i_moves_index + 1
+                ) % total_moves # Scroll down
+                if selected_generation_i_moves_index >= total_moves:
+                    selected_generation_i_moves_index = 0
+                update_display = True
+
+            elif not button_B.value:
+                current_state = GENERATION_I_STATE
+                update_display = True
+                break
