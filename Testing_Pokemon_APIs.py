@@ -356,14 +356,17 @@ while True:
                 if selected_generation_i_index == 0:
                     print(f"Selected Index: {selected_generation_i_index}")
                     current_state = GENERATION_I_MAIN_REGION_STATE
+                    update_display = True
                     fetch_generation_i_main_region()
                 elif selected_generation_i_index == 1:
                     print(f"Selected Index: {selected_generation_i_index}")
                     current_state = GENERATION_I_MOVES_STATE
+                    update_display = True
                     fetch_generation_1_moves()
                 elif selected_generation_i_index == 2:
                     print(f"Selected Index: {selected_generation_i_index}")
                     current_state = GENERATION_I_POKEMON_SPECIES_STATE
+                    update_display = True
                     fetch_generation_1_pokemon_species()
 
             # Looping display for end and beginning
