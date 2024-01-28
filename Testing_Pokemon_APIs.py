@@ -337,4 +337,26 @@ while True:
         while True:
 
             if update_display:
-                
+                update_generation_i_moves_display(selected_generation_i_moves_index)
+                update_display = False
+
+            if not button_U.value:
+                selected_generation_i_moves_index = (
+                    selected_generation_i_moves_index - 1
+                ) % total_moves # Scroll up
+                if selected_generation_i_moves_index < 0:
+                    selected_generation_i_moves_index = total_moves - 1
+                update_display = True
+
+            elif not button_D.value:
+                selected_generation_i_moves_index = (
+                    selected_generation_i_moves_index + 1
+                ) % total_moves # Scroll down
+                if selected_generation_i_moves_index >= total_moves:
+                    selected_generation_i_moves_index = 0
+                update_display = True
+
+            elif not button_B.value:
+                current_state = GENERATION_I_STATE
+                update_display = True
+                break
