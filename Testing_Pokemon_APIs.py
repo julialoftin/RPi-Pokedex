@@ -179,7 +179,7 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
     disp.image(buffer_generation_i_moves)
     disp.show()
 
-def fetch_main_region():
+def fetch_generation_i_main_region():
     global total_regions, main_region_data, selected_generation_i_main_region_index, current_state, update_display
     try:
         response = requests.get(generation_i_api_url)
@@ -194,6 +194,26 @@ def fetch_main_region():
             return total_regions
         else:
             print(f"Failed to fetch main region data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+def fetch_generation_1_moves():
+    global moves_data, total_moves, selected_generation_i_moves_index, current_state, update_display
+    try:
+        response = requests.get(generation_i_api_url)
+        if response.status_code == 200:
+            moves_data = response.json().get("moves", [])
+            if moves_data:
+                total_moves = len(moves_data)
+                selected_generation_i_moves_index = 0
+                current_state = GENERATION_I_MOVES_STATE
+                update_display = True
+                print(f"Transitioning to GENERATION_I_MOVES_STATE")
+                return total_moves
+            else:
+                print(f"Moves data is empty.")
+        else:
+            print(f"Failed to fetch moves data. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
 
@@ -277,25 +297,10 @@ while True:
             if not button_A.value:
                 if selected_generation_i_index == 0:
                     print(f"Selected Index: {selected_generation_i_index}")
-                    fetch_main_region()
+                    fetch_generation_i_main_region()
                 elif selected_generation_i_index == 1:
                     print(f"Selected Index: {selected_generation_i_index}")
-                    try:
-                        response = requests.get(generation_i_api_url)
-                        if response.status_code == 200:
-                            moves_data = response.json().get("moves", [])
-                            if moves_data:
-                                total_moves = len(moves_data)
-                                selected_generation_i_moves_index = 0
-                                current_state = GENERATION_I_MOVES_STATE
-                                update_display = True
-                                print(f"Transitioning to GENERATION_I_MOVES_STATE")
-                            else:
-                                print(f"Moves data is empty.")
-                        else:
-                            print(f"Failed to fetch moves data. Status code: {response.status_code}")
-                    except requests.exceptions.RequestException as e:
-                        print(f"An error occurred: {e}")
+                    fetch_generation_1_moves()
 
             # Looping display for end and beginning
             if selected_generation_i_index == 0:
@@ -321,7 +326,7 @@ while True:
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
         selected_generation_i_main_region_index = 0
-        total_regions = fetch_main_region()
+        total_regions = fetch_generation_i_main_region()
         while True:
                 
             if update_display:
@@ -352,6 +357,7 @@ while True:
     elif current_state == GENERATION_I_MOVES_STATE:
         print(f"In GENERATION_I_MOVES_STATE")
         selected_generation_i_moves_index = 0
+        total_moves = fetch_generation_1_moves
         while True:
 
             if update_display:
