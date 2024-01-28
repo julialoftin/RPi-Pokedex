@@ -472,6 +472,7 @@ while True:
                 update_display = True
 
             elif not button_B.value:
+                print("Transitioning back to GENERATION_I_STATE from POKEMON_SPECIES_STATE")
                 current_state = GENERATION_I_STATE
                 update_display = True
                 break
