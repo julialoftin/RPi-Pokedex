@@ -302,6 +302,7 @@ while True:
                             selected_generation_i_main_region_index = 0
                             current_state = GENERATION_I_MAIN_REGION_STATE
                             update_display = True
+                            print("Transitioning to GENERATION_I_MAIN_REGION_STATE")
                         else:
                             print(f"Failed to fetch main region data. Status code: {response.status_code}")
                     except requests.exceptions.RequestException as e:
@@ -325,6 +326,7 @@ while True:
                 break
 
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
+        print("In GENERATION_I_MAIN_REGION_STATE")
         try:
             response = requests.get(generation_i_api_url)
 
