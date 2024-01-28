@@ -164,7 +164,7 @@ def update_generation_i_main_region_display(selected_generation_i_main_region_in
         except KeyError as e:
             print(f"KeyError: {e}, main_region_data: {main_region_data}")
 
-    disp.image(buffer_menu)
+    disp.image(buffer_generation_i_main_region)
     disp.show()
 
 while True:
