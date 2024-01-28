@@ -272,12 +272,15 @@ while True:
                     try:
                         response = requests.get(generation_i_api_url)
                         if response.status_code == 200:
-                            moves_data = response.json().get("moves", {}).get("name", "")
-                            total_moves = len(moves_data)
-                            selected_generation_i_moves_index = 0
-                            current_state = GENERATION_I_MOVES_STATE
-                            update_display = True
-                            print(f"Transitioning to GENERATION_I_MOVES_STATE")
+                            moves_data = response.json().get("moves", [])
+                            if moves_data:
+                                total_moves = len(moves_data)
+                                selected_generation_i_moves_index = 0
+                                current_state = GENERATION_I_MOVES_STATE
+                                update_display = True
+                                print(f"Transitioning to GENERATION_I_MOVES_STATE")
+                            else:
+                                print(f"Moves data is empty.")
                         else:
                             print(f"Failed to fetch moves data. Status code: {response.status_code}")
                     except requests.exceptions.RequestException as e:
