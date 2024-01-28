@@ -243,7 +243,6 @@ def fetch_generation_1_moves():
                 total_moves = len(moves_data)
                 selected_generation_i_moves_index = 0
                 current_state = GENERATION_I_MOVES_STATE
-                update_display = True
                 print(f"Transitioning to GENERATION_I_MOVES_STATE")
                 update_generation_i_moves_display(selected_generation_i_moves_index)
                 return total_moves
@@ -265,7 +264,6 @@ def fetch_generation_1_pokemon_species():
                 total_pokemon_species = len(pokemon_species_data)
                 selected_generation_i_pokemon_species_index = 0
                 current_state = GENERATION_I_POKEMON_SPECIES_STATE
-                update_display = True
                 print(f"Transitioning to GENERATION_I_POKEMON_SPECIES_STATE")
                 update_generation_i_pokemon_species_display(selected_generation_i_pokemon_species_index)
                 return total_pokemon_species
