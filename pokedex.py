@@ -56,7 +56,7 @@ def update_display_main_menu(selected_index_main_menu):
     for i, item in enumerate(main_menu_items):
         display_text = item
 
-        if i == selected_index_main_menu:
+        if i + start_index_menu == selected_index_main_menu:
             display_text = f"# {display_text}"
 
         draw_main_menu.text(0, (i * 10), display_text, fill=1)
