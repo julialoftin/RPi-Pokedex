@@ -46,6 +46,10 @@ draw_pokemon = ImageDraw.Draw(buffer_pokemon)
 buffer_generation_i_list = Image.new("1", (disp.width, disp.height))
 draw_generation_i_list = ImageDraw.Draw(buffer_generation_i_list)
 
+# Create an off-screen buffer and drawing object for Generation I Main Region List
+buffer_generation_i_main_region = Image.new("1", (disp.width, disp.height))
+draw_generation_i_main_region = ImageDraw.Draw(buffer_generation_i_list)
+
 # Define states
 MENU_STATE = 0
 POKEMON_LIST_STATE = 1
@@ -141,7 +145,7 @@ def update_generation_i_display(selected_generation_i_index):
     disp.show()
 
 def update_generation_i_main_region_display(selected_generation_i_main_region_index):
-    clear_buffer(buffer_menu, draw_menu)
+    clear_buffer(buffer_generation_i_main_region, draw_generation_i_main_region)
 
     display_count = 1
 
