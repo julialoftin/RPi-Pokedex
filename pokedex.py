@@ -73,14 +73,8 @@ while True:
 
         if not button_U.value:
             print("Button U Pressed")
-            if selected_index_main_menu == 0:
-                selected_index_main_menu = total_main_menu_items - 1 # Wraps to last item
-            else:
-                selected_index_main_menu = (selected_index_main_menu - 1) % total_main_menu_items
-
-            if selected_index_main_menu < start_index_menu:
-                start_index_menu = selected_index_main_menu
-            
+            selected_index_main_menu = (selected_index_main_menu - 1) % total_main_menu_items
+            start_index_menu = selected_index_main_menu
             update_display_main_menu(selected_index_main_menu)
 
         # if selected_index_main_menu == 0:
