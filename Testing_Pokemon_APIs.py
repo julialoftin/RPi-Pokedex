@@ -311,6 +311,11 @@ while True:
                 update_generation_i_display(selected_generation_i_index)
                 update_display = True
 
+            elif not button_A.value and selected_generation_i_index == 0:
+                current_state = GENERATION_I_MAIN_REGION_STATE
+                update_display = True
+                break
+
         current_state = MENU_STATE
 
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
