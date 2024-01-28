@@ -180,7 +180,7 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
     disp.show()
 
 def fetch_main_region():
-    global total_regions, selected_generation_i_main_region_index, current_state, update_display
+    global total_regions, main_region_data, selected_generation_i_main_region_index, current_state, update_display
     try:
         response = requests.get(generation_i_api_url)
         if response.status_code == 200:
