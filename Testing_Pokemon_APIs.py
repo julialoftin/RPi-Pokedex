@@ -158,7 +158,7 @@ def update_generation_i_main_region_display(selected_generation_i_main_region_in
         if i + start_index_generation_i_main_region == selected_generation_i_main_region_index:
             display_text = f"# {display_text}"
 
-        draw_menu.text((0, (i * 10) + 10), display_text, fill=1)
+        draw_generation_i_main_region.text((0, (i * 10) + 10), display_text, fill=1)
 
     disp.image(buffer_menu)
     disp.show()
