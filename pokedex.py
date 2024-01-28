@@ -49,7 +49,7 @@ def clear_buffer(buffer, draw):
 
 def update_display_main_menu(selected_index_main_menu):
     clear_buffer(buffer_main_menu, draw_main_menu)
-    draw_main_menu.text((0, 0) "PokeDictionary", fill=1)
+    draw_main_menu.text((0, 0), "PokeDictionary", fill=1)
 
     main_menu_items = ["Generations", "Items", "Pokemon"]
 
