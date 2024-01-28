@@ -77,6 +77,7 @@ start_index_generation_i_moves = 0
 
 total_regions = 0
 selected_generation_i_main_region_index = 0
+main_region_data = []
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
