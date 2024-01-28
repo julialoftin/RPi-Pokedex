@@ -122,6 +122,7 @@ def update_generation_i_display(selected_generation_i_index):
     disp.show()
 
 def update_generation_i_main_region_display(selected_generation_i_main_region_index):
+    global start_index_generation_i_main_region
     clear_buffer(buffer_generation_i_main_region, draw_generation_i_main_region)
 
     display_count = 1
