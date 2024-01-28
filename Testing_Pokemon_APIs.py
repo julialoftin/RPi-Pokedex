@@ -75,6 +75,9 @@ start_index_generation_i = 0
 start_index_generation_i_main_region = 0
 start_index_generation_i_moves = 0
 
+total_regions = 0
+selected_generation_i_main_region_index = 0
+
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
 
@@ -176,6 +179,7 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
     disp.show()
 
 def fetch_main_region():
+    global total_regions, selected_generation_i_main_region_index, current_state, update_display
     try:
         response = requests.get(generation_i_api_url)
         if response.status_code == 200:
@@ -185,6 +189,7 @@ def fetch_main_region():
             current_state = GENERATION_I_MAIN_REGION_STATE
             update_display = True
             print("Transitioning to GENERATION_I_MAIN_REGION_STATE")
+            return total_regions
         else:
             print(f"Failed to fetch main region data. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
@@ -314,9 +319,9 @@ while True:
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
         selected_generation_i_main_region_index = 0
-        total_regions 
+        total_regions = fetch_main_region()
         while True:
-
+                
             if update_display:
                 update_generation_i_main_region_display(selected_generation_i_main_region_index)
                 update_display = False
