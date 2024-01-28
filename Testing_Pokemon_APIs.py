@@ -160,7 +160,8 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
 
     for i in range(max_visible_items):
         try:
-            moves_name = moves_data.get("name", "")
+            move_data = moves_data[start_index_generation_i_moves + i]
+            move_name = move_data.get("name", "")
             display_text = f"{moves_name}"
 
             if i + start_index_generation_i_moves == selected_generation_i_moves_index:
