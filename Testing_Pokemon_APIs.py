@@ -285,10 +285,19 @@ while True:
 
             if not button_A.value:
                 if selected_generation_i_index == 0:
-                    current_state = GENERATION_I_MAIN_REGION_STATE
-                    start_index_generation_i_main_region = 0
-                    update_display = True
-                    break
+                    try:
+                        response = requests.get(generation_i_api_url)
+                        if response.status_code == 200:
+                            main_region_data = response.json().get("main_region", [])
+                            total_regions = len(main_region_data)
+                            selected_generation_i_main_region_index = 0
+                            current_state = GENERATION_I_MAIN_REGION_STATE
+                            update_display = True
+                            break
+                        else:
+                            print(f"Failed to fetch main region data. Status code: {response.status_code}")
+                    except requests.exceptions.RequestException as e:
+                        print(f"An error occurred: {e}")
 
             # Looping display for end and beginning
 
