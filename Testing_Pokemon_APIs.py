@@ -357,6 +357,9 @@ while True:
                 elif selected_generation_i_index == 1:
                     print(f"Selected Index: {selected_generation_i_index}")
                     fetch_generation_1_moves()
+                elif selected_generation_i_index == 2:
+                    print(f"Selected Index: {selected_generation_i_index}")
+                    fetch_generation_1_pokemon_species()
 
             # Looping display for end and beginning
             if selected_generation_i_index == 0:
