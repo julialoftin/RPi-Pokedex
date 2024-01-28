@@ -66,5 +66,7 @@ def update_display_main_menu(selected_index_main_menu):
 
 
 while True:
+
     if current_state == MAIN_MENU_STATE:
-        try: 
+        selected_index_main_menu = 0
+        update_display_main_menu(selected_index_main_menu)
