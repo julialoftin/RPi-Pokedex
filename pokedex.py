@@ -71,11 +71,13 @@ while True:
         total_main_menu_items = 3
         update_display_main_menu(selected_index_main_menu)
 
-        if not button_U.value:
-            print("Button U Pressed")
-            selected_index_main_menu = (selected_index_main_menu - 1) % total_main_menu_items
-            start_index_menu = selected_index_main_menu
+        while True:
             update_display_main_menu(selected_index_main_menu)
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_main_menu = (selected_index_main_menu - 1) % total_main_menu_items
+                start_index_menu = selected_index_main_menu
+                update_display_main_menu(selected_index_main_menu)
 
         # if selected_index_main_menu == 0:
         #     start_index_menu = 0
