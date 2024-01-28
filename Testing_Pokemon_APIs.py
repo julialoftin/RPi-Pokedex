@@ -184,7 +184,8 @@ def fetch_main_region():
     try:
         response = requests.get(generation_i_api_url)
         if response.status_code == 200:
-            main_region_data = response.json().get("main_region", {}).get("name", "")
+            data = response.json()
+            main_region_data = [data["main_region"]]
             total_regions = len(main_region_data)
             selected_generation_i_main_region_index = 0
             current_state = GENERATION_I_MAIN_REGION_STATE
