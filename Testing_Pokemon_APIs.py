@@ -320,8 +320,6 @@ while True:
                 update_display = True
                 break
 
-        current_state = MENU_STATE
-
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         try:
             response = requests.get(generation_i_api_url)
