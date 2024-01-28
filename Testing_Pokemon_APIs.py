@@ -220,6 +220,7 @@ while True:
 
     elif current_state == GENERATION_I_STATE:
         selected_generation_i_index = 0
+        selected_generation_i_moves_index = 0
         total_generation_i_items = 5
 
         update_generation_i_display(selected_generation_i_index)
