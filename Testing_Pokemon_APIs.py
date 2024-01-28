@@ -311,7 +311,7 @@ while True:
 
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
-        start_index_generation_i_main_region = 0
+        selected_generation_i_main_region_index = 0
         while True:
 
             if update_display:
@@ -341,6 +341,7 @@ while True:
 
     elif current_state == GENERATION_I_MOVES_STATE:
         print(f"In GENERATION_I_MOVES_STATE")
+        selected_generation_i_moves_index = 0
         while True:
 
             if update_display:
