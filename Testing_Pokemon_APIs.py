@@ -245,6 +245,7 @@ def fetch_generation_1_moves():
                 current_state = GENERATION_I_MOVES_STATE
                 update_display = True
                 print(f"Transitioning to GENERATION_I_MOVES_STATE")
+                update_generation_i_moves_display(selected_generation_i_moves_index)
                 return total_moves
             else:
                 print(f"Moves data is empty.")
@@ -266,6 +267,7 @@ def fetch_generation_1_pokemon_species():
                 current_state = GENERATION_I_POKEMON_SPECIES_STATE
                 update_display = True
                 print(f"Transitioning to GENERATION_I_POKEMON_SPECIES_STATE")
+                update_generation_i_pokemon_species_display(selected_generation_i_pokemon_species_index)
                 return total_pokemon_species
             else:
                 print(f"Pokemon species is empty.")
