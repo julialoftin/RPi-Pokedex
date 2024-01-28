@@ -143,7 +143,7 @@ def update_generation_i_display(selected_generation_i_index):
 def update_generation_i_main_region_display(selected_generation_i_main_region_index):
     clear_buffer(buffer_menu, draw_menu)
 
-    display_count = 6
+    display_count = 1
 
     max_visible_items = min(display_count, total_regions - start_index_generation_i_main_region)
 
