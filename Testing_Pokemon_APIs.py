@@ -258,7 +258,8 @@ def fetch_generation_1_pokemon_species():
     try:
         response = requests.get(generation_i_api_url)
         if response.status_code == 200:
-            pokemon_species_data = response.json().get("pokemon_species", [])
+            data = response.json()
+            pokemon_species_data = data.get("pokemon_species", [])
             if pokemon_species_data:
                 total_pokemon_species = len(pokemon_species_data)
                 selected_generation_i_pokemon_species_index = 0
