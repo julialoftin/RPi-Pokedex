@@ -74,8 +74,8 @@ while True:
 
         if not button_U.value:
             selected_index_main_menu = (selected_index_main_menu - 1) % main_menu_items_length # Scroll Down
-            if selected_index_main_menu < 0:
-                selected_index_main_menu = main_menu_items_length - 1
+            if selected_index_main_menu < start_index_menu:
+                start_index_menu = selected_index_main_menu
             update_display_main_menu(selected_index_main_menu)
 
         # if selected_index_main_menu == 0:
