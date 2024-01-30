@@ -87,7 +87,6 @@ while True:
                 update_display_main_menu(selected_index_main_menu)
 
 
-
         # if selected_index_main_menu == 0:
         #     start_index_menu = 0
         #     update_display_main_menu(selected_index_main_menu)
