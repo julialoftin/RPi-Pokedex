@@ -86,6 +86,7 @@ def update_display_generations_menu(selected_index_generations_menu):
     draw_generations_menu.text((0, 0), "Generations:", fill=1)
 
     display_count = 5
+    total_generations_menu_items = len(fetch_generation_data())
     max_visible_items = min(display_count, total_generations_menu_items - start_index_generations_menu)
 
     for i in range(max_visible_items):
