@@ -191,7 +191,7 @@ def update_display_generation_ii_menu(selected_index_generation_ii_menu):
 
 def update_display_generation_iii_menu(selected_index_generation_iii_menu):
     clear_buffer(buffer_generation_iii_menu, draw_generation_iii_menu)
-    draw_generation_iii_menu.text((0, 0), "Generation II:", fill=1)
+    draw_generation_iii_menu.text((0, 0), "Generation III:", fill=1)
 
     generation_iii_menu_items = ["Main Region", "Moves", "Pokemon Species", "Pokemon Types", "Game Versions"]
 
