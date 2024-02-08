@@ -101,6 +101,12 @@ def update_display_generations_menu(selected_index_generations_menu):
 
             draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
+    # Handle wrapping when reaching beginning and end of buffer display
+    if selected_index_generations_menu < start_index_generations_menu:
+        start_index_generations_menu = selected_index_generations_menu
+    elif selected_index_generations_menu >=  start_index_generations_menu + max_visible_items:
+        start_index_generations_menu = selected_index_generations_menu - max_visible_items + 1
+
     disp.image(buffer_generations_menu)
     disp.show()
 
