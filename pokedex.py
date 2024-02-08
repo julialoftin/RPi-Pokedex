@@ -141,6 +141,18 @@ while True:
 
         while True:
             update_display_generations_menu(selected_index_generations_menu)
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_generations_menu = (selected_index_generations_menu - 1) % total_generations_menu_items
+                if selected_index_generations_menu < 0:
+                    selected_index_generations_menu = total_generations_menu_items - 1
+                update_display_generations_menu(selected_index_generations_menu)
+            if not button_D.value:
+                print("Button D Pressed")
+                selected_index_generations_menu = (selected_index_generations_menu + 1) % total_generations_menu_items
+                if selected_index_generations_menu >= total_generations_menu_items:
+                    selected_index_generations_menu = 0
+                update_display_generations_menu(selected_index_generations_menu)
 
         
 
