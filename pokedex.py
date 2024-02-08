@@ -261,6 +261,9 @@ while True:
                 if selected_index_generations_menu == 1:
                     current_state = GENERATION_II_MENU_STATE
                     break
+                if selected_index_generations_menu == 2:
+                    current_state = GENERATION_III_MENU_STATE
+                    break
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = MAIN_MENU_STATE
