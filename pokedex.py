@@ -160,6 +160,10 @@ while True:
                 if selected_index_generations_menu >= total_generations_menu_items:
                     selected_index_generations_menu = 0
                 update_display_generations_menu(selected_index_generations_menu)
+            if not button_B.value:
+                print("Button B Pressed")
+                current_state = MAIN_MENU_STATE
+                break
 
         
 
