@@ -92,13 +92,14 @@ def update_display_generations_menu(selected_index_generations_menu):
     generation_results = fetch_generation_data()
 
     for i in range(max_visible_items):
-        generation_name = generation_results[start_index_generations_menu + 1].get("name", "")
-        display_text = f"{generation_name}"
+        if start_index_generations_menu + i < total_generations_menu_items:
+            generation_name = generation_results[start_index_generations_menu + 1].get("name", "")
+            display_text = f"{generation_name}"
 
-        if i == selected_index_generations_menu:
-            display_text = f"# {display_text}"
+            if i == selected_index_generations_menu:
+                display_text = f"# {display_text}"
 
-        draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
+            draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
     disp.image(buffer_generations_menu)
     disp.show()
