@@ -108,6 +108,8 @@ while True:
         total_main_menu_items = 3
         update_display_main_menu(selected_index_main_menu)
 
+        selected_index_generations_menu = 0
+
         while True:
             update_display_main_menu(selected_index_main_menu)
             if not button_U.value:
@@ -126,6 +128,7 @@ while True:
                 print("Button A Pressed")
                 if selected_index_main_menu == 0:
                     current_state = GENERATIONS_MENU_STATE
+                    update_display_generations_menu(selected_index_generations_menu)
 
     if current_state == GENERATIONS_MENU_STATE:
         selected_index_generations_menu = 0
