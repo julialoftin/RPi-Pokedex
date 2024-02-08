@@ -29,7 +29,7 @@ button_D.direction = Direction.INPUT
 button_D.pull = Pull.UP
 
 # API URLs
-
+generation_api_url = "https://pokeapi.co/api/v2/generation"
 
 # Create an off-screen buffer and drawing object for Main Menu List
 buffer_main_menu = Image.new("1", (disp.width, disp.height))
@@ -71,7 +71,7 @@ def update_display_main_menu(selected_index_main_menu):
 
 def fetch_generation_data():
     try:
-        response = requests.get("https://pokeapi.co/api/v2/generation")
+        response = requests.get(generation_api_url)
         if response.status_code == 200:
             generation_data = response.json().get("results", [])
             return generation_data
@@ -79,7 +79,6 @@ def fetch_generation_data():
             print(f"Failed to get Generations data. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
-
 
 def update_display_generations_menu(selected_index_generations_menu):
     clear_buffer(buffer_generations_menu, draw_generations_menu)
@@ -110,7 +109,6 @@ def update_display_generations_menu(selected_index_generations_menu):
 
     disp.image(buffer_generations_menu)
     disp.show()
-
 
 while True:
 
@@ -163,6 +161,3 @@ while True:
                 print("Button B Pressed")
                 current_state = MAIN_MENU_STATE
                 break
-
-        
-
