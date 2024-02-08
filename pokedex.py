@@ -140,10 +140,12 @@ while True:
                     current_state = GENERATIONS_MENU_STATE
                     break
 
-    if current_state == GENERATIONS_MENU_STATE:
+    elif current_state == GENERATIONS_MENU_STATE:
         selected_index_generations_menu = 0
         total_generations_menu_items = len(fetch_generation_data())
         update_display_generations_menu(selected_index_generations_menu)
+
+        current_state = GENERATIONS_MENU_STATE
 
         while True:
             update_display_generations_menu(selected_index_generations_menu)
