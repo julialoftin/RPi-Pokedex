@@ -87,6 +87,7 @@ def update_display_generations_menu(selected_index_generations_menu):
 
     display_count = 5
     total_generations_menu_items = len(fetch_generation_data())
+    start_index_generations_menu = 0
     max_visible_items = min(display_count, total_generations_menu_items - start_index_generations_menu)
 
     generation_results = fetch_generation_data()
