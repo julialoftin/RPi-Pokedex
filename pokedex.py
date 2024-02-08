@@ -130,7 +130,7 @@ while True:
                 print("Button A Pressed")
                 if selected_index_main_menu == 0:
                     current_state = GENERATIONS_MENU_STATE
-                    # update_display_generations_menu(selected_index_generations_menu)
+                    break
 
     if current_state == GENERATIONS_MENU_STATE:
         selected_index_generations_menu = 0
