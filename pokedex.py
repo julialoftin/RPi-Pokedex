@@ -37,14 +37,18 @@ draw_main_menu = ImageDraw.Draw(buffer_main_menu)
 # Create an off-screen buffer and drawing object for Generations Menu List
 buffer_generations_menu = Image.new("1", (disp.width, disp.height))
 draw_generations_menu = ImageDraw.Draw(buffer_generations_menu)
-# Create an off-screen buffer and drawing object for Generations Menu List
+# Create an off-screen buffer and drawing object for Generation I Menu List
 buffer_generation_i_menu = Image.new("1", (disp.width, disp.height))
 draw_generation_i_menu = ImageDraw.Draw(buffer_generation_i_menu)
+# Create an off-screen buffer and drawing object for Generation II Menu List
+buffer_generation_ii_menu = Image.new("1", (disp.width, disp.height))
+draw_generation_ii_menu = ImageDraw.Draw(buffer_generation_ii_menu)
 
 # Define states
 MAIN_MENU_STATE = 0
 GENERATIONS_MENU_STATE = 1
 GENERATION_I_MENU_STATE = 2
+GENERATION_II_MENU_STATE = 3
 
 # Initialize the current state and the selected menu item
 current_state = MAIN_MENU_STATE
@@ -53,6 +57,7 @@ current_state = MAIN_MENU_STATE
 start_index_menu = 0
 start_index_generations_menu = 0
 start_index_generation_i_menu = 0
+start_index_generation_ii_menu = 0
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
@@ -132,6 +137,23 @@ def update_display_generation_i_menu(selected_index_generation_i_menu):
     disp.image(buffer_generation_i_menu)
     disp.show()
 
+def update_display_generation_ii_menu(selected_index_generation_ii_menu):
+    clear_buffer(buffer_generation_ii_menu, draw_generation_ii_menu)
+    draw_generation_ii_menu.text((0, 0), "Generation II:", fill=1)
+
+    generation_ii_menu_items = ["Main Region", "Moves", "Pokemon Species", "Pokemon Types", "Game Versions"]
+
+    for i, item in enumerate(generation_ii_menu_items):
+        display_text = item
+
+        if i + start_index_generation_ii_menu == selected_index_generation_ii_menu:
+            display_text = f"# {display_text}"
+
+        draw_generation_ii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generation_ii_menu)
+    disp.show()
+
 while True:
 
     if current_state == MAIN_MENU_STATE:
@@ -184,6 +206,9 @@ while True:
                 if selected_index_generations_menu == 0:
                     current_state = GENERATION_I_MENU_STATE
                     break
+                if selected_index_generations_menu == 1:
+                    current_state = GENERATION_II_MENU_STATE
+                    break
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = MAIN_MENU_STATE
@@ -207,6 +232,29 @@ while True:
                 if selected_index_generation_i_menu >= total_generation_i_menu_items:
                     selected_index_generation_i_menu = 0
                 update_display_generation_i_menu(selected_index_generation_i_menu)
+            if not button_B.value:
+                print("Button B Pressed")
+                current_state = GENERATIONS_MENU_STATE
+                break
+
+    if current_state == GENERATION_II_MENU_STATE:
+        selected_index_generation_ii_menu = 0
+        total_generation_ii_menu_items = 5
+        update_display_generation_ii_menu(selected_index_generation_ii_menu)
+
+        while True:
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_generation_ii_menu = (selected_index_generation_ii_menu - 1) % total_generation_ii_menu_items
+                if selected_index_generation_ii_menu < 0:
+                    selected_index_generation_ii_menu = total_generation_ii_menu_items - 1
+                update_display_generation_i_menu(selected_index_generation_ii_menu)
+            if not button_D.value:
+                print("Button D Pressed")
+                selected_index_generation_ii_menu = (selected_index_generation_ii_menu + 1) % total_generation_ii_menu_items
+                if selected_index_generation_ii_menu >= total_generation_ii_menu_items:
+                    selected_index_generation_ii_menu = 0
+                update_display_generation_i_menu(selected_index_generation_ii_menu)
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
