@@ -93,7 +93,7 @@ def update_display_generations_menu(selected_index_generations_menu):
 
     for i in range(max_visible_items):
         if start_index_generations_menu + i < total_generations_menu_items:
-            generation_name = generation_results[start_index_generations_menu + 1].get("name", "")
+            generation_name = generation_results[start_index_generations_menu + i].get("name", "")
             display_text = f"{generation_name}"
 
             if i == selected_index_generations_menu:
