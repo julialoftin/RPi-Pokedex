@@ -93,10 +93,10 @@ def update_display_generations_menu(selected_index_generations_menu):
     generation_results = fetch_generation_data()
 
     # Handle wrapping when reaching beginning and end of buffer display
-    if selected_index_generations_menu < start_index_generations_menu:
-        start_index_generations_menu = selected_index_generations_menu
-    elif selected_index_generations_menu >=  start_index_generations_menu + max_visible_items:
-        start_index_generations_menu = selected_index_generations_menu - max_visible_items + 1
+    # if selected_index_generations_menu < start_index_generations_menu:
+    #     start_index_generations_menu = selected_index_generations_menu
+    # elif selected_index_generations_menu >=  start_index_generations_menu + max_visible_items:
+    #     start_index_generations_menu = selected_index_generations_menu - max_visible_items + 1
 
     for i in range(max_visible_items):
         if start_index_generations_menu + i < total_generations_menu_items:
