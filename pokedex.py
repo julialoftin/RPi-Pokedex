@@ -47,7 +47,7 @@ current_state = MAIN_MENU_STATE
 
 # Initialize start index for scrolling
 start_index_menu = 0
-global start_index_generations_menu
+start_index_generations_menu = 0
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
@@ -82,6 +82,7 @@ def fetch_generation_data():
 
 
 def update_display_generations_menu(selected_index_generations_menu):
+    global start_index_generations_menu
     clear_buffer(buffer_generations_menu, draw_generations_menu)
     draw_generations_menu.text((0, 0), "Generations:", fill=1)
 
