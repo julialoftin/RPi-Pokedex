@@ -248,13 +248,13 @@ while True:
                 selected_index_generation_ii_menu = (selected_index_generation_ii_menu - 1) % total_generation_ii_menu_items
                 if selected_index_generation_ii_menu < 0:
                     selected_index_generation_ii_menu = total_generation_ii_menu_items - 1
-                update_display_generation_i_menu(selected_index_generation_ii_menu)
+                update_display_generation_ii_menu(selected_index_generation_ii_menu)
             if not button_D.value:
                 print("Button D Pressed")
                 selected_index_generation_ii_menu = (selected_index_generation_ii_menu + 1) % total_generation_ii_menu_items
                 if selected_index_generation_ii_menu >= total_generation_ii_menu_items:
                     selected_index_generation_ii_menu = 0
-                update_display_generation_i_menu(selected_index_generation_ii_menu)
+                update_display_generation_ii_menu(selected_index_generation_ii_menu)
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
