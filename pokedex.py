@@ -31,18 +31,23 @@ button_D.pull = Pull.UP
 # API URLs
 
 
-# Create an off-screen buffer and drawing object for Menu List
+# Create an off-screen buffer and drawing object for Main Menu List
 buffer_main_menu = Image.new("1", (disp.width, disp.height))
 draw_main_menu = ImageDraw.Draw(buffer_main_menu)
+# Create an off-screen buffer and drawing object for Generations Menu List
+buffer_generations_menu = Image.new("1", (disp.width, disp.height))
+draw_generations_menu = ImageDraw.Draw(buffer_generations_menu)
 
 # Define states
 MAIN_MENU_STATE = 0
+GENERATIONS_MENU_STATE = 1
 
 # Initialize the current state and the selected menu item
 current_state = MAIN_MENU_STATE
 
 # Initialize start index for scrolling
 start_index_menu = 0
+start_index_generations_menu = 0
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
@@ -63,6 +68,38 @@ def update_display_main_menu(selected_index_main_menu):
 
     disp.image(buffer_main_menu)
     disp.show()
+
+def fetch_generation_data():
+    try:
+        response = requests.get("https://pokeapi.co/api/v2/generation")
+        if response.status_code == 200:
+            generation_data = response.json().get("results", [])
+            return generation_data
+        else:
+            print(f"Failed to get Generations data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occured: {e}")
+
+
+def update_display_generations_menu(selected_index_generations_menu):
+    clear_buffer(buffer_generations_menu, draw_generations_menu)
+    draw_generations_menu.text((0, 0), "Generations:", fill=1)
+
+    display_count = 5
+    max_visible_items = min(display_count, total_generations_menu_items - start_index_generations_menu)
+
+    for i in range(max_visible_items):
+        generation_name = fetch_generation_data()[start_index_generations_menu + 1].get("name", "")
+        display_text = f"{generation_name}"
+
+        if i + start_index_generations_menu == selected_index_generations_menu:
+            display_text = f"# {display_text}"
+
+        draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generations_menu)
+    disp.show()
+
 
 while True:
 
@@ -85,12 +122,18 @@ while True:
                 if selected_index_main_menu >= total_main_menu_items:
                     selected_index_main_menu = 0
                 update_display_main_menu(selected_index_main_menu)
+            if not button_A.value:
+                print("Button A Pressed")
+                if selected_index_main_menu == 0:
+                    current_state = GENERATIONS_MENU_STATE
 
+    if current_state == GENERATIONS_MENU_STATE:
+        selected_index_generations_menu = 0
+        total_generations_menu_items = len(fetch_generation_data())
+        update_display_generations_menu(selected_index_generations_menu)
 
-        # if selected_index_main_menu == 0:
-        #     start_index_menu = 0
-        #     update_display_main_menu(selected_index_main_menu)
+        while True:
+            update_display_generations_menu(selected_index_generations_menu)
 
-        # if selected_index_main_menu == main_menu_items_length - 1:
-        #     start_index_menu = main_menu_items_length - 3
-        #     update_display_main_menu(selected_index_main_menu)
+        
+
