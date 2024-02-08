@@ -82,7 +82,6 @@ def fetch_generation_data():
 
 
 def update_display_generations_menu(selected_index_generations_menu):
-    global start_index_generations_menu
     clear_buffer(buffer_generations_menu, draw_generations_menu)
     draw_generations_menu.text((0, 0), "Generations:", fill=1)
 
