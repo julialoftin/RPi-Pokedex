@@ -47,7 +47,7 @@ current_state = MAIN_MENU_STATE
 
 # Initialize start index for scrolling
 start_index_menu = 0
-start_index_generations_menu = 0
+global start_index_generations_menu
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
