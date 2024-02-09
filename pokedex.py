@@ -1072,7 +1072,7 @@ while True:
 
     if current_state == GENERATION_VII_MAIN_REGION_MENU_STATE:
         selected_index_generation_vii_main_region_menu = 0
-        generation_vi_data = fetch_generation_vii_data()
+        generation_vii_data = fetch_generation_vii_data()
         main_region_data = [generation_vii_data["main_region"]]
         total_generation_vii_main_region_menu_items = len(main_region_data)
         update_display_generation_vii_main_region_menu(selected_index_generation_vii_main_region_menu)
