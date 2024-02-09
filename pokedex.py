@@ -274,6 +274,23 @@ def update_display_generation_vii_menu(selected_index_generation_vii_menu):
     disp.image(buffer_generation_vii_menu)
     disp.show()
 
+def update_display_generation_viii_menu(selected_index_generation_viii_menu):
+    clear_buffer(buffer_generation_viii_menu, draw_generation_viii_menu)
+    draw_generation_viii_menu.text((0, 0), "Generation VIII:", fill=1)
+
+    generation_viii_menu_items = ["Main Region", "Moves", "Pokemon Species", "Pokemon Types", "Game Versions"]
+
+    for i, item in enumerate(generation_viii_menu_items):
+        display_text = item
+
+        if i + start_index_generation_viii_menu == selected_index_generation_viii_menu:
+            display_text = f"# {display_text}"
+
+        draw_generation_viii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generation_viii_menu)
+    disp.show()
+
 while True:
 
     if current_state == MAIN_MENU_STATE:
@@ -511,6 +528,29 @@ while True:
                 if selected_index_generation_vii_menu >= total_generation_vii_menu_items:
                     selected_index_generation_vii_menu = 0
                 update_display_generation_vii_menu(selected_index_generation_vii_menu)
+            if not button_B.value:
+                print("Button B Pressed")
+                current_state = GENERATIONS_MENU_STATE
+                break
+
+    if current_state == GENERATION_VIII_MENU_STATE:
+        selected_index_generation_viii_menu = 0
+        total_generation_viii_menu_items = 5
+        update_display_generation_viii_menu(selected_index_generation_viii_menu)
+
+        while True:
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_generation_viii_menu = (selected_index_generation_viii_menu - 1) % total_generation_viii_menu_items
+                if selected_index_generation_viii_menu < 0:
+                    selected_index_generation_viii_menu = total_generation_viii_menu_items - 1
+                update_display_generation_viii_menu(selected_index_generation_viii_menu)
+            if not button_D.value:
+                print("Button D Pressed")
+                selected_index_generation_viii_menu = (selected_index_generation_viii_menu + 1) % total_generation_viii_menu_items
+                if selected_index_generation_viii_menu >= total_generation_viii_menu_items:
+                    selected_index_generation_viii_menu = 0
+                update_display_generation_viii_menu(selected_index_generation_viii_menu)
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
