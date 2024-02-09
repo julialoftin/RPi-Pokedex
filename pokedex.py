@@ -223,6 +223,23 @@ def update_display_generation_iv_menu(selected_index_generation_iv_menu):
     disp.image(buffer_generation_iv_menu)
     disp.show()
 
+def update_display_generation_v_menu(selected_index_generation_v_menu):
+    clear_buffer(buffer_generation_v_menu, draw_generation_v_menu)
+    draw_generation_v_menu.text((0, 0), "Generation V:", fill=1)
+
+    generation_v_menu_items = ["Main Region", "Moves", "Pokemon Species", "Pokemon Types", "Game Versions"]
+
+    for i, item in enumerate(generation_v_menu_items):
+        display_text = item
+
+        if i + start_index_generation_v_menu == selected_index_generation_v_menu:
+            display_text = f"# {display_text}"
+
+        draw_generation_v_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generation_v_menu)
+    disp.show()
+
 while True:
 
     if current_state == MAIN_MENU_STATE:
@@ -283,6 +300,21 @@ while True:
                     break
                 if selected_index_generations_menu == 3:
                     current_state = GENERATION_IV_MENU_STATE
+                    break
+                if selected_index_generations_menu == 4:
+                    current_state = GENERATION_V_MENU_STATE
+                    break
+                if selected_index_generations_menu == 5:
+                    current_state = GENERATION_VI_MENU_STATE
+                    break
+                if selected_index_generations_menu == 6:
+                    current_state = GENERATION_VII_MENU_STATE
+                    break
+                if selected_index_generations_menu == 7:
+                    current_state = GENERATION_VIII_MENU_STATE
+                    break
+                if selected_index_generations_menu == 8:
+                    current_state = GENERATION_IX_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
@@ -376,6 +408,29 @@ while True:
                 if selected_index_generation_iv_menu >= total_generation_iv_menu_items:
                     selected_index_generation_iv_menu = 0
                 update_display_generation_iv_menu(selected_index_generation_iv_menu)
+            if not button_B.value:
+                print("Button B Pressed")
+                current_state = GENERATIONS_MENU_STATE
+                break
+
+    if current_state == GENERATION_V_MENU_STATE:
+        selected_index_generation_v_menu = 0
+        total_generation_v_menu_items = 5
+        update_display_generation_v_menu(selected_index_generation_v_menu)
+
+        while True:
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_generation_v_menu = (selected_index_generation_v_menu - 1) % total_generation_v_menu_items
+                if selected_index_generation_v_menu < 0:
+                    selected_index_generation_v_menu = total_generation_v_menu_items - 1
+                update_display_generation_v_menu(selected_index_generation_v_menu)
+            if not button_D.value:
+                print("Button D Pressed")
+                selected_index_generation_v_menu = (selected_index_generation_v_menu + 1) % total_generation_v_menu_items
+                if selected_index_generation_v_menu >= total_generation_v_menu_items:
+                    selected_index_generation_v_menu = 0
+                update_display_generation_v_menu(selected_index_generation_v_menu)
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
