@@ -729,7 +729,7 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_v_menu == 0:
-                    current_state = GENERATION_IV_MAIN_REGION_MENU_STATE
+                    current_state = GENERATION_V_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
