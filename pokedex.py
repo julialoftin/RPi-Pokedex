@@ -364,9 +364,9 @@ while True:
                 if selected_index_generations_menu == 7:
                     current_state = GENERATION_VIII_MENU_STATE
                     break
-                if selected_index_generations_menu == 8:
-                    current_state = GENERATION_IX_MENU_STATE
-                    break
+                # if selected_index_generations_menu == 8:
+                #     current_state = GENERATION_IX_MENU_STATE
+                #     break
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = MAIN_MENU_STATE
