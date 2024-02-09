@@ -510,7 +510,7 @@ while True:
                 selected_index_generation_vii_menu = (selected_index_generation_vii_menu + 1) % total_generation_vii_menu_items
                 if selected_index_generation_vii_menu >= total_generation_vii_menu_items:
                     selected_index_generation_vii_menu = 0
-                update_display_generation_vi_menu(selected_index_generation_vii_menu)
+                update_display_generation_vii_menu(selected_index_generation_vii_menu)
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
