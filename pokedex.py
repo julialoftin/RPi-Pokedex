@@ -650,3 +650,21 @@ while True:
         main_region_data = [generation_i_data["main_region"]]
         total_generation_i_main_region_menu_items = len(main_region_data)
         update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
+
+        while True:
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_generation_i_main_region_menu = (selected_index_generation_i_main_region_menu - 1) % total_generation_i_main_region_menu_items
+                if selected_index_generation_i_main_region_menu < 0:
+                    selected_index_generation_i_main_region_menu = total_generation_i_main_region_menu_items - 1
+                update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
+            if not button_D.value:
+                print("Button D Pressed")
+                selected_index_generation_i_main_region_menu = (selected_index_generation_i_main_region_menu + 1) % total_generation_i_main_region_menu_items
+                if selected_index_generation_i_main_region_menu >= total_generation_i_main_region_menu_items:
+                    selected_index_generation_i_main_region_menu = 0
+                update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
+            if not button_B.value:
+                print("Button B Pressed")
+                current_state = GENERATION_I_MENU_STATE
+                break
