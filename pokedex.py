@@ -999,7 +999,7 @@ while True:
                 current_state = GENERATION_V_MENU_STATE
                 break
 
-     if current_state == GENERATION_VI_MAIN_REGION_MENU_STATE:
+    if current_state == GENERATION_VI_MAIN_REGION_MENU_STATE:
         selected_index_generation_vi_main_region_menu = 0
         generation_vi_data = fetch_generation_vi_data()
         main_region_data = [generation_vi_data["main_region"]]
