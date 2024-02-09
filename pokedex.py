@@ -450,6 +450,11 @@ while True:
                 if selected_index_generation_i_menu >= total_generation_i_menu_items:
                     selected_index_generation_i_menu = 0
                 update_display_generation_i_menu(selected_index_generation_i_menu)
+            if not button_A.value:
+                print("Button A Pressed")
+                if selected_index_generation_i_menu = 0:
+                    current_state = GENERATION_I_MAIN_REGION_MENU_STATE
+                    break
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
