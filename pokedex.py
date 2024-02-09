@@ -337,9 +337,19 @@ def update_display_generation_i_main_region_menu(selected_index_generation_i_mai
     start_index_generation_i_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_i_main_region_menu_items - start_index_generation_i_main_region_menu)
 
-    
+    for i in range(max_visible_items):
+        if start_index_generation_i_main_region_menu + i < total_generation_i_main_region_menu_items:
+            region_name = main_region_data[start_index_generation_i_main_region_menu + i].get("name", "")
 
+            display_text = f"{region_name}"
 
+            if i + start_index_generation_i_main_region_menu == selected_index_generation_i_main_region_menu:
+                display_text = f"# {display_text}"
+
+            draw_generation_i_main_region_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generation_i_main_region_menu)
+    disp.show()
 
 while True:
 
@@ -629,4 +639,9 @@ while True:
                 current_state = GENERATIONS_MENU_STATE
                 break
 
-    
+    if current_state == GENERATION_I_MAIN_REGION_MENU_STATE:
+        selected_index_generation_i_main_region_menu = 0
+        generation_i_data = fetch_generation_i_data()
+        main_region_data = [generation_i_data["main_region"]]
+        total_generation_i_main_region_menu_items = len(main_region_data)
+        update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
