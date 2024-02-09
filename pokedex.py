@@ -67,6 +67,9 @@ draw_generation_ix_menu = ImageDraw.Draw(buffer_generation_ix_menu)
 # Create an off-screen buffer and drawing object for Generation I Main Region Menu
 buffer_generation_i_main_region_menu = Image.new("1", (disp.width, disp.height))
 draw_generation_i_main_region_menu = ImageDraw.Draw(buffer_generation_i_main_region_menu)
+# Create an off-screen buffer and drawing object for Generation II Main Region Menu
+buffer_generation_ii_main_region_menu = Image.new("1", (disp.width, disp.height))
+draw_generation_ii_main_region_menu = ImageDraw.Draw(buffer_generation_ii_main_region_menu)
 
 # Define states
 MAIN_MENU_STATE = 0
@@ -82,6 +85,7 @@ GENERATION_VIII_MENU_STATE = 9
 GENERATION_IX_MENU_STATE = 10
 
 GENERATION_I_MAIN_REGION_MENU_STATE = 11
+GENERATION_II_MAIN_REGION_MENU_STATE = 12
 
 # Initialize the current state and the selected menu item
 current_state = MAIN_MENU_STATE
@@ -100,6 +104,7 @@ start_index_generation_viii_menu = 0
 start_index_generation_ix_menu = 0
 
 start_index_generation_i_main_region_menu = 0
+start_index_generation_ii_main_region_menu = 0
 
 def clear_buffer(buffer, draw):
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
@@ -138,6 +143,17 @@ def fetch_generation_i_data():
         if response.status_code == 200:
             generation_i_data = response.json()
             return generation_i_data
+        else:
+            print(f"Failed to get Generations data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occured: {e}")
+
+def fetch_generation_ii_data():
+    try:
+        response = requests.get(generation_api_url + "/2/")
+        if response.status_code == 200:
+            generation_ii_data = response.json()
+            return generation_ii_data
         else:
             print(f"Failed to get Generations data. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
@@ -351,6 +367,31 @@ def update_display_generation_i_main_region_menu(selected_index_generation_i_mai
     disp.image(buffer_generation_i_main_region_menu)
     disp.show()
 
+def update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu):
+    clear_buffer(buffer_generation_ii_main_region_menu, draw_generation_ii_main_region_menu)
+    draw_generation_ii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
+
+    display_count = 5
+    generation_ii_data = fetch_generation_ii_data()
+    main_region_data = [generation_ii_data["main_region"]]
+    total_generation_ii_main_region_menu_items = len(main_region_data)
+    start_index_generation_ii_main_region_menu = 0
+    max_visible_items = min(display_count, total_generation_ii_main_region_menu_items - start_index_generation_ii_main_region_menu)
+
+    for i in range(max_visible_items):
+        if start_index_generation_ii_main_region_menu + i < total_generation_ii_main_region_menu_items:
+            region_name = main_region_data[start_index_generation_ii_main_region_menu + i].get("name", "")
+
+            display_text = f"{region_name}"
+
+            if i + start_index_generation_ii_main_region_menu == selected_index_generation_ii_main_region_menu:
+                display_text = f"# {display_text}"
+
+            draw_generation_ii_main_region_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generation_ii_main_region_menu)
+    disp.show()
+
 while True:
 
     if current_state == MAIN_MENU_STATE:
@@ -478,6 +519,11 @@ while True:
                 if selected_index_generation_ii_menu >= total_generation_ii_menu_items:
                     selected_index_generation_ii_menu = 0
                 update_display_generation_ii_menu(selected_index_generation_ii_menu)
+            if not button_A.value:
+                print("Button A Pressed")
+                if selected_index_generation_ii_main_region_menu == 0:
+                    current_state = GENERATION_II_MAIN_REGION_MENU_STATE
+                    break
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATIONS_MENU_STATE
@@ -667,4 +713,29 @@ while True:
             if not button_B.value:
                 print("Button B Pressed")
                 current_state = GENERATION_I_MENU_STATE
+                break
+
+    if current_state == GENERATION_II_MAIN_REGION_MENU_STATE:
+        selected_index_generation_ii_main_region_menu = 0
+        generation_ii_data = fetch_generation_ii_data()
+        main_region_data = [generation_ii_data["main_region"]]
+        total_generation_ii_main_region_menu_items = len(main_region_data)
+        update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
+
+        while True:
+            if not button_U.value:
+                print("Button U Pressed")
+                selected_index_generation_ii_main_region_menu = (selected_index_generation_ii_main_region_menu - 1) % total_generation_ii_main_region_menu_items
+                if selected_index_generation_ii_main_region_menu < 0:
+                    selected_index_generation_ii_main_region_menu = total_generation_ii_main_region_menu_items - 1
+                update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
+            if not button_D.value:
+                print("Button D Pressed")
+                selected_index_generation_ii_main_region_menu = (selected_index_generation_ii_main_region_menu + 1) % total_generation_ii_main_region_menu_items
+                if selected_index_generation_ii_main_region_menu >= total_generation_ii_main_region_menu_items:
+                    selected_index_generation_ii_main_region_menu = 0
+                update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
+            if not button_B.value:
+                print("Button B Pressed")
+                current_state = GENERATION_II_MENU_STATE
                 break
