@@ -521,7 +521,7 @@ while True:
                 update_display_generation_ii_menu(selected_index_generation_ii_menu)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_ii_main_region_menu == 0:
+                if selected_index_generation_ii_menu == 0:
                     current_state = GENERATION_II_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
