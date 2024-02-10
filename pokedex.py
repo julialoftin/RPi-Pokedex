@@ -154,7 +154,7 @@ def clear_buffer(buffer, draw):
     """ Clears screen for drawing """
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
 
-def update_display_main_menu(selected_index_main_menu):
+def update_display_main_menu(selected_index):
     """ Creates main display menu """
     clear_buffer(buffer_main_menu, draw_main_menu)
     draw_main_menu.text((0, 0), "PokeDictionary", fill=1)
@@ -164,7 +164,7 @@ def update_display_main_menu(selected_index_main_menu):
     for i, item in enumerate(main_menu_items):
         display_text = item
 
-        if i + START_INDEX_MENU == selected_index_main_menu:
+        if i + START_INDEX_MENU == selected_index:
             display_text = f"# {display_text}"
 
         draw_main_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -764,29 +764,29 @@ def update_display_generation_i_moves_menu(selected_index_generation_i_moves_men
 while True:
 
     if CURRENT_STATE == MAIN_MENU_STATE:
-        selected_index_main_menu = 0
+        SELECTED_INDEX_MAIN_MENU = 0
         TOTAL_MAIN_MENU_ITEMS = 3
-        update_display_main_menu(selected_index_main_menu)
+        update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
 
         selected_index_generations_menu = 0
 
         while True:
-            update_display_main_menu(selected_index_main_menu)
+            update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_main_menu = (selected_index_main_menu - 1) % TOTAL_MAIN_MENU_ITEMS
-                if selected_index_main_menu < 0:
-                    selected_index_main_menu = TOTAL_MAIN_MENU_ITEMS - 1
-                update_display_main_menu(selected_index_main_menu)
+                SELECTED_INDEX_MAIN_MENU = (SELECTED_INDEX_MAIN_MENU - 1) % TOTAL_MAIN_MENU_ITEMS
+                if SELECTED_INDEX_MAIN_MENU < 0:
+                    SELECTED_INDEX_MAIN_MENU = TOTAL_MAIN_MENU_ITEMS - 1
+                update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_main_menu = (selected_index_main_menu + 1) % TOTAL_MAIN_MENU_ITEMS
-                if selected_index_main_menu >= TOTAL_MAIN_MENU_ITEMS:
-                    selected_index_main_menu = 0
-                update_display_main_menu(selected_index_main_menu)
+                SELECTED_INDEX_MAIN_MENU = (SELECTED_INDEX_MAIN_MENU + 1) % TOTAL_MAIN_MENU_ITEMS
+                if SELECTED_INDEX_MAIN_MENU >= TOTAL_MAIN_MENU_ITEMS:
+                    SELECTED_INDEX_MAIN_MENU = 0
+                update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_main_menu == 0:
+                if SELECTED_INDEX_MAIN_MENU == 0:
                     CURRENT_STATE = GENERATIONS_MENU_STATE
                     break
 
