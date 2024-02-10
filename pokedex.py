@@ -768,7 +768,7 @@ while True:
         TOTAL_MAIN_MENU_ITEMS = 3
         update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
 
-        selected_index_generations_menu = 0
+        # selected_index_generations_menu = 0
 
         while True:
             update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
@@ -791,50 +791,50 @@ while True:
                     break
 
     if CURRENT_STATE == GENERATIONS_MENU_STATE:
-        # selected_index_generations_menu = 0
+        SELECTED_INDEX_GENERATIONS_MENU = 0
         total_generations_menu_items = len(fetch_generation_data())
-        update_display_generations_menu(selected_index_generations_menu)
+        update_display_generations_menu(SELECTED_INDEX_GENERATIONS_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generations_menu = (selected_index_generations_menu - 1) % total_generations_menu_items
-                if selected_index_generations_menu < 0:
-                    selected_index_generations_menu = total_generations_menu_items - 1
-                update_display_generations_menu(selected_index_generations_menu)
+                SELECTED_INDEX_GENERATIONS_MENU = (SELECTED_INDEX_GENERATIONS_MENU - 1) % total_generations_menu_items
+                if SELECTED_INDEX_GENERATIONS_MENU < 0:
+                    SELECTED_INDEX_GENERATIONS_MENU = total_generations_menu_items - 1
+                update_display_generations_menu(SELECTED_INDEX_GENERATIONS_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generations_menu = (selected_index_generations_menu + 1) % total_generations_menu_items
-                if selected_index_generations_menu >= total_generations_menu_items:
-                    selected_index_generations_menu = 0
-                update_display_generations_menu(selected_index_generations_menu)
+                SELECTED_INDEX_GENERATIONS_MENU = (SELECTED_INDEX_GENERATIONS_MENU + 1) % total_generations_menu_items
+                if SELECTED_INDEX_GENERATIONS_MENU >= total_generations_menu_items:
+                    SELECTED_INDEX_GENERATIONS_MENU = 0
+                update_display_generations_menu(SELECTED_INDEX_GENERATIONS_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generations_menu == 0:
+                if SELECTED_INDEX_GENERATIONS_MENU == 0:
                     CURRENT_STATE = GENERATION_I_MENU_STATE
                     break
-                if selected_index_generations_menu == 1:
+                if SELECTED_INDEX_GENERATIONS_MENU == 1:
                     CURRENT_STATE = GENERATION_II_MENU_STATE
                     break
-                if selected_index_generations_menu == 2:
+                if SELECTED_INDEX_GENERATIONS_MENU == 2:
                     CURRENT_STATE = GENERATION_III_MENU_STATE
                     break
-                if selected_index_generations_menu == 3:
+                if SELECTED_INDEX_GENERATIONS_MENU == 3:
                     CURRENT_STATE = GENERATION_IV_MENU_STATE
                     break
-                if selected_index_generations_menu == 4:
+                if SELECTED_INDEX_GENERATIONS_MENU == 4:
                     CURRENT_STATE = GENERATION_V_MENU_STATE
                     break
-                if selected_index_generations_menu == 5:
+                if SELECTED_INDEX_GENERATIONS_MENU == 5:
                     CURRENT_STATE = GENERATION_VI_MENU_STATE
                     break
-                if selected_index_generations_menu == 6:
+                if SELECTED_INDEX_GENERATIONS_MENU == 6:
                     CURRENT_STATE = GENERATION_VII_MENU_STATE
                     break
-                if selected_index_generations_menu == 7:
+                if SELECTED_INDEX_GENERATIONS_MENU == 7:
                     CURRENT_STATE = GENERATION_VIII_MENU_STATE
                     break
-                if selected_index_generations_menu == 8:
+                if SELECTED_INDEX_GENERATIONS_MENU == 8:
                     CURRENT_STATE = GENERATION_IX_MENU_STATE
                     break
             if not button_B.value:
