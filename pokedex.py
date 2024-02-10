@@ -474,6 +474,12 @@ def update_display_generation_i_main_region_menu(selected_index_generation_i_mai
     start_index_generation_i_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_i_main_region_menu_items - start_index_generation_i_main_region_menu)
 
+    # Handle wrapping when reaching beginning and end of buffer display
+    if selected_index_generation_i_moves_menu < start_index_generation_i_moves_menu:
+        start_index_generation_i_moves_menu = selected_index_generation_i_moves_menu
+    elif selected_index_generation_i_moves_menu >=  start_index_generation_i_moves_menu + max_visible_items:
+        start_index_generation_i_moves_menu = selected_index_generation_i_moves_menu - max_visible_items + 1
+
     for i in range(max_visible_items):
         if start_index_generation_i_main_region_menu + i < total_generation_i_main_region_menu_items:
             region_name = main_region_data[start_index_generation_i_main_region_menu + i].get("name", "")
