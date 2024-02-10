@@ -29,7 +29,7 @@ button_D.direction = Direction.INPUT
 button_D.pull = Pull.UP
 
 # API URLs
-generation_api_url = "https://pokeapi.co/api/v2/generation"
+GENERATION_API_URL = "https://pokeapi.co/api/v2/generation"
 
 # Create an off-screen buffer and drawing object for Main Menu
 buffer_main_menu = Image.new("1", (disp.width, disp.height))
@@ -123,37 +123,39 @@ GENERATION_IX_MAIN_REGION_MENU_STATE = 19
 GENERATION_I_MOVES_MENU_STATE = 20
 
 # Initialize the current state and the selected menu item
-current_state = MAIN_MENU_STATE
+CURRENT_STATE = MAIN_MENU_STATE
 
 # Initialize start index for scrolling
-start_index_menu = 0
-start_index_generations_menu = 0
-start_index_generation_i_menu = 0
-start_index_generation_ii_menu = 0
-start_index_generation_iii_menu = 0
-start_index_generation_iv_menu = 0
-start_index_generation_v_menu = 0
-start_index_generation_vi_menu = 0
-start_index_generation_vii_menu = 0
-start_index_generation_viii_menu = 0
-start_index_generation_ix_menu = 0
+START_INDEX_MENU = 0
+START_INDEX_GENERATIONS_MENU = 0
+START_INDEX_GENERATION_I_MENU = 0
+START_INDEX_GENERATION_II_MENU = 0
+START_INDEX_GENERATION_III_MENU = 0
+START_INDEX_GENERATION_IV_MENU = 0
+START_INDEX_GENERATION_V_MENU = 0
+START_INDEX_GENERATION_VI_MENU = 0
+START_INDEX_GENERATION_VII_MENU = 0
+START_INDEX_GENERATION_VIII_MENU = 0
+START_INDEX_GENERATION_IX_MENU = 0
 
-start_index_generation_i_main_region_menu = 0
-start_index_generation_ii_main_region_menu = 0
-start_index_generation_iii_main_region_menu = 0
-start_index_generation_iv_main_region_menu = 0
-start_index_generation_v_main_region_menu = 0
-start_index_generation_vi_main_region_menu = 0
-start_index_generation_vii_main_region_menu = 0
-start_index_generation_viii_main_region_menu = 0
-start_index_generation_ix_main_region_menu = 0
+START_INDEX_GENERATION_I_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_II_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_III_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_IV_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_V_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_VI_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_VII_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_VIII_MAIN_REGION_MENU = 0
+START_INDEX_GENERATION_IX_MAIN_REGION_MENU = 0
 
-start_index_generation_i_moves_menu = 0
+START_INDEX_GENERATION_I_MOVES_MENU = 0
 
 def clear_buffer(buffer, draw):
+    """ Clears screen for drawing """
     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
 
 def update_display_main_menu(selected_index_main_menu):
+    """ Creates main display menu """
     clear_buffer(buffer_main_menu, draw_main_menu)
     draw_main_menu.text((0, 0), "PokeDictionary", fill=1)
 
@@ -162,7 +164,7 @@ def update_display_main_menu(selected_index_main_menu):
     for i, item in enumerate(main_menu_items):
         display_text = item
 
-        if i + start_index_menu == selected_index_main_menu:
+        if i + START_INDEX_MENU == selected_index_main_menu:
             display_text = f"# {display_text}"
 
         draw_main_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -171,116 +173,137 @@ def update_display_main_menu(selected_index_main_menu):
     disp.show()
 
 def fetch_generation_data():
+    """ Calls API for generation data """
     try:
-        response = requests.get(generation_api_url)
+        response = requests.get(GENERATION_API_URL)
         if response.status_code == 200:
             generation_data = response.json().get("results", [])
             return generation_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_i_data():
+    """ Calls API for generation 1 data """
     try:
-        response = requests.get(generation_api_url + "/1/")
+        response = requests.get(GENERATION_API_URL + "/1/")
         if response.status_code == 200:
             generation_i_data = response.json()
             return generation_i_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_ii_data():
+    """ Calls API for generation 2 data """
     try:
-        response = requests.get(generation_api_url + "/2/")
+        response = requests.get(GENERATION_API_URL + "/2/")
         if response.status_code == 200:
             generation_ii_data = response.json()
             return generation_ii_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_iii_data():
+    """ Calls API for generation 3 data """
     try:
-        response = requests.get(generation_api_url + "/3/")
+        response = requests.get(GENERATION_API_URL + "/3/")
         if response.status_code == 200:
             generation_iii_data = response.json()
             return generation_iii_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_iv_data():
+    """ Calls API for generation 4 data """
     try:
-        response = requests.get(generation_api_url + "/4/")
+        response = requests.get(GENERATION_API_URL + "/4/")
         if response.status_code == 200:
             generation_iv_data = response.json()
             return generation_iv_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_v_data():
+    """ Calls API for generation 5 data """
     try:
-        response = requests.get(generation_api_url + "/5/")
+        response = requests.get(GENERATION_API_URL + "/5/")
         if response.status_code == 200:
             generation_v_data = response.json()
             return generation_v_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_vi_data():
+    """ Calls API for generation 6 data """
     try:
-        response = requests.get(generation_api_url + "/6/")
+        response = requests.get(GENERATION_API_URL + "/6/")
         if response.status_code == 200:
             generation_vi_data = response.json()
             return generation_vi_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_vii_data():
+    """ Calls API for generation 7 data """
     try:
-        response = requests.get(generation_api_url + "/7/")
+        response = requests.get(GENERATION_API_URL + "/7/")
         if response.status_code == 200:
             generation_vii_data = response.json()
             return generation_vii_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_viii_data():
+    """ Calls API for generation 8 data """
     try:
-        response = requests.get(generation_api_url + "/8/")
+        response = requests.get(GENERATION_API_URL + "/8/")
         if response.status_code == 200:
             generation_viii_data = response.json()
             return generation_viii_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
 def fetch_generation_ix_data():
+    """ Calls API for generation 9 data """
     try:
-        response = requests.get(generation_api_url + "/9/")
+        response = requests.get(GENERATION_API_URL + "/9/")
         if response.status_code == 200:
             generation_ix_data = response.json()
             return generation_ix_data
-        else:
-            print(f"Failed to get Generations data. Status code: {response.status_code}")
+        print(f"Failed to get Generations data. Status code: {response.status_code}")
+        return None
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
+        return None
 
-def update_display_generations_menu(selected_index_generations_menu):
+def update_display_generations_menu(selected_index):
+    """ Creates generations menu display """
     clear_buffer(buffer_generations_menu, draw_generations_menu)
     draw_generations_menu.text((0, 0), "Generations:", fill=1)
 
@@ -292,17 +315,17 @@ def update_display_generations_menu(selected_index_generations_menu):
     generation_results = fetch_generation_data()
 
     # Handle wrapping when reaching beginning and end of buffer display
-    if selected_index_generations_menu < start_index_generations_menu:
-        start_index_generations_menu = selected_index_generations_menu
-    elif selected_index_generations_menu >=  start_index_generations_menu + max_visible_items:
-        start_index_generations_menu = selected_index_generations_menu - max_visible_items + 1
+    if selected_index < start_index_generations_menu:
+        start_index_generations_menu = selected_index
+    elif selected_index >=  start_index_generations_menu + max_visible_items:
+        start_index_generations_menu = selected_index - max_visible_items + 1
 
     for i in range(max_visible_items):
         if start_index_generations_menu + i < total_generations_menu_items:
             generation_name = generation_results[start_index_generations_menu + i].get("name", "")
             display_text = f"{generation_name}"
 
-            if start_index_generations_menu + i == selected_index_generations_menu:
+            if start_index_generations_menu + i == selected_index:
                 display_text = f"# {display_text}"
 
             draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -311,6 +334,7 @@ def update_display_generations_menu(selected_index_generations_menu):
     disp.show()
 
 def update_display_generation_i_menu(selected_index_generation_i_menu):
+    """ Creates generation 1 menu display """
     clear_buffer(buffer_generation_i_menu, draw_generation_i_menu)
     draw_generation_i_menu.text((0, 0), "Generation I:", fill=1)
 
@@ -319,7 +343,7 @@ def update_display_generation_i_menu(selected_index_generation_i_menu):
     for i, item in enumerate(generation_i_menu_items):
         display_text = item
 
-        if i + start_index_generation_i_menu == selected_index_generation_i_menu:
+        if i + START_INDEX_GENERATION_I_MENU == selected_index_generation_i_menu:
             display_text = f"# {display_text}"
 
         draw_generation_i_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -328,6 +352,7 @@ def update_display_generation_i_menu(selected_index_generation_i_menu):
     disp.show()
 
 def update_display_generation_ii_menu(selected_index_generation_ii_menu):
+    """ Creates generation 2 menu display """
     clear_buffer(buffer_generation_ii_menu, draw_generation_ii_menu)
     draw_generation_ii_menu.text((0, 0), "Generation II:", fill=1)
 
@@ -336,7 +361,7 @@ def update_display_generation_ii_menu(selected_index_generation_ii_menu):
     for i, item in enumerate(generation_ii_menu_items):
         display_text = item
 
-        if i + start_index_generation_ii_menu == selected_index_generation_ii_menu:
+        if i + START_INDEX_GENERATION_II_MENU == selected_index_generation_ii_menu:
             display_text = f"# {display_text}"
 
         draw_generation_ii_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -345,6 +370,7 @@ def update_display_generation_ii_menu(selected_index_generation_ii_menu):
     disp.show()
 
 def update_display_generation_iii_menu(selected_index_generation_iii_menu):
+    """ Creates generation 3 menu display """
     clear_buffer(buffer_generation_iii_menu, draw_generation_iii_menu)
     draw_generation_iii_menu.text((0, 0), "Generation III:", fill=1)
 
@@ -353,7 +379,7 @@ def update_display_generation_iii_menu(selected_index_generation_iii_menu):
     for i, item in enumerate(generation_iii_menu_items):
         display_text = item
 
-        if i + start_index_generation_iii_menu == selected_index_generation_iii_menu:
+        if i + START_INDEX_GENERATION_III_MENU == selected_index_generation_iii_menu:
             display_text = f"# {display_text}"
 
         draw_generation_iii_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -362,6 +388,7 @@ def update_display_generation_iii_menu(selected_index_generation_iii_menu):
     disp.show()
 
 def update_display_generation_iv_menu(selected_index_generation_iv_menu):
+    """ Creates generation 4 menu display """
     clear_buffer(buffer_generation_iv_menu, draw_generation_iv_menu)
     draw_generation_iv_menu.text((0, 0), "Generation IV:", fill=1)
 
@@ -370,7 +397,7 @@ def update_display_generation_iv_menu(selected_index_generation_iv_menu):
     for i, item in enumerate(generation_iv_menu_items):
         display_text = item
 
-        if i + start_index_generation_iv_menu == selected_index_generation_iv_menu:
+        if i + START_INDEX_GENERATION_IV_MENU == selected_index_generation_iv_menu:
             display_text = f"# {display_text}"
 
         draw_generation_iv_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -379,6 +406,7 @@ def update_display_generation_iv_menu(selected_index_generation_iv_menu):
     disp.show()
 
 def update_display_generation_v_menu(selected_index_generation_v_menu):
+    """ Creates generation 5 menu display """
     clear_buffer(buffer_generation_v_menu, draw_generation_v_menu)
     draw_generation_v_menu.text((0, 0), "Generation V:", fill=1)
 
@@ -387,7 +415,7 @@ def update_display_generation_v_menu(selected_index_generation_v_menu):
     for i, item in enumerate(generation_v_menu_items):
         display_text = item
 
-        if i + start_index_generation_v_menu == selected_index_generation_v_menu:
+        if i + START_INDEX_GENERATION_V_MENU == selected_index_generation_v_menu:
             display_text = f"# {display_text}"
 
         draw_generation_v_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -396,6 +424,7 @@ def update_display_generation_v_menu(selected_index_generation_v_menu):
     disp.show()
 
 def update_display_generation_vi_menu(selected_index_generation_vi_menu):
+    """ Creates generation 6 menu display """
     clear_buffer(buffer_generation_vi_menu, draw_generation_vi_menu)
     draw_generation_vi_menu.text((0, 0), "Generation VI:", fill=1)
 
@@ -404,7 +433,7 @@ def update_display_generation_vi_menu(selected_index_generation_vi_menu):
     for i, item in enumerate(generation_vi_menu_items):
         display_text = item
 
-        if i + start_index_generation_vi_menu == selected_index_generation_vi_menu:
+        if i + START_INDEX_GENERATION_VI_MENU == selected_index_generation_vi_menu:
             display_text = f"# {display_text}"
 
         draw_generation_vi_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -413,6 +442,7 @@ def update_display_generation_vi_menu(selected_index_generation_vi_menu):
     disp.show()
 
 def update_display_generation_vii_menu(selected_index_generation_vii_menu):
+    """ Creates generation 7 menu display """
     clear_buffer(buffer_generation_vii_menu, draw_generation_vii_menu)
     draw_generation_vii_menu.text((0, 0), "Generation VII:", fill=1)
 
@@ -421,7 +451,7 @@ def update_display_generation_vii_menu(selected_index_generation_vii_menu):
     for i, item in enumerate(generation_vii_menu_items):
         display_text = item
 
-        if i + start_index_generation_vii_menu == selected_index_generation_vii_menu:
+        if i + START_INDEX_GENERATION_VII_MENU == selected_index_generation_vii_menu:
             display_text = f"# {display_text}"
 
         draw_generation_vii_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -430,6 +460,7 @@ def update_display_generation_vii_menu(selected_index_generation_vii_menu):
     disp.show()
 
 def update_display_generation_viii_menu(selected_index_generation_viii_menu):
+    """ Creates generation 8 menu display """
     clear_buffer(buffer_generation_viii_menu, draw_generation_viii_menu)
     draw_generation_viii_menu.text((0, 0), "Generation VIII:", fill=1)
 
@@ -438,7 +469,7 @@ def update_display_generation_viii_menu(selected_index_generation_viii_menu):
     for i, item in enumerate(generation_viii_menu_items):
         display_text = item
 
-        if i + start_index_generation_viii_menu == selected_index_generation_viii_menu:
+        if i + START_INDEX_GENERATION_VIII_MENU == selected_index_generation_viii_menu:
             display_text = f"# {display_text}"
 
         draw_generation_viii_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -447,6 +478,7 @@ def update_display_generation_viii_menu(selected_index_generation_viii_menu):
     disp.show()
 
 def update_display_generation_ix_menu(selected_index_generation_ix_menu):
+    """ Creates generation 9 menu display """
     clear_buffer(buffer_generation_ix_menu, draw_generation_ix_menu)
     draw_generation_ix_menu.text((0, 0), "Generation IX:", fill=1)
 
@@ -455,7 +487,7 @@ def update_display_generation_ix_menu(selected_index_generation_ix_menu):
     for i, item in enumerate(generation_ix_menu_items):
         display_text = item
 
-        if i + start_index_generation_ix_menu == selected_index_generation_ix_menu:
+        if i + START_INDEX_GENERATION_IX_MENU == selected_index_generation_ix_menu:
             display_text = f"# {display_text}"
 
         draw_generation_ix_menu.text((0, (i * 10) + 10), display_text, fill=1)
@@ -464,6 +496,7 @@ def update_display_generation_ix_menu(selected_index_generation_ix_menu):
     disp.show()
 
 def update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu):
+    """ Creates generation 1 main region menu display """
     clear_buffer(buffer_generation_i_main_region_menu, draw_generation_i_main_region_menu)
     draw_generation_i_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -489,6 +522,7 @@ def update_display_generation_i_main_region_menu(selected_index_generation_i_mai
     disp.show()
 
 def update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu):
+    """ Creates generation 2 main region menu display """
     clear_buffer(buffer_generation_ii_main_region_menu, draw_generation_ii_main_region_menu)
     draw_generation_ii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -514,6 +548,7 @@ def update_display_generation_ii_main_region_menu(selected_index_generation_ii_m
     disp.show()
 
 def update_display_generation_iii_main_region_menu(selected_index_generation_iii_main_region_menu):
+    """ Creates generation 3 main region menu display """
     clear_buffer(buffer_generation_iii_main_region_menu, draw_generation_iii_main_region_menu)
     draw_generation_iii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -539,6 +574,7 @@ def update_display_generation_iii_main_region_menu(selected_index_generation_iii
     disp.show()
 
 def update_display_generation_iv_main_region_menu(selected_index_generation_iv_main_region_menu):
+    """ Creates generation 4 main region menu display """
     clear_buffer(buffer_generation_iv_main_region_menu, draw_generation_iv_main_region_menu)
     draw_generation_iv_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -564,6 +600,7 @@ def update_display_generation_iv_main_region_menu(selected_index_generation_iv_m
     disp.show()
 
 def update_display_generation_v_main_region_menu(selected_index_generation_v_main_region_menu):
+    """ Creates generation 5 main region menu display """
     clear_buffer(buffer_generation_v_main_region_menu, draw_generation_v_main_region_menu)
     draw_generation_v_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -589,6 +626,7 @@ def update_display_generation_v_main_region_menu(selected_index_generation_v_mai
     disp.show()
 
 def update_display_generation_vi_main_region_menu(selected_index_generation_vi_main_region_menu):
+    """ Creates generation 6 main region menu display """
     clear_buffer(buffer_generation_vi_main_region_menu, draw_generation_vi_main_region_menu)
     draw_generation_vi_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -614,6 +652,7 @@ def update_display_generation_vi_main_region_menu(selected_index_generation_vi_m
     disp.show()
 
 def update_display_generation_vii_main_region_menu(selected_index_generation_vii_main_region_menu):
+    """ Creates generation 7 main region menu display """
     clear_buffer(buffer_generation_vii_main_region_menu, draw_generation_vii_main_region_menu)
     draw_generation_vii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -639,6 +678,7 @@ def update_display_generation_vii_main_region_menu(selected_index_generation_vii
     disp.show()
 
 def update_display_generation_viii_main_region_menu(selected_index_generation_viii_main_region_menu):
+    """ Creates generation 8 main region menu display """
     clear_buffer(buffer_generation_viii_main_region_menu, draw_generation_viii_main_region_menu)
     draw_generation_viii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -664,6 +704,7 @@ def update_display_generation_viii_main_region_menu(selected_index_generation_vi
     disp.show()
 
 def update_display_generation_ix_main_region_menu(selected_index_generation_ix_main_region_menu):
+    """ Creates generation 9 main region menu display """
     clear_buffer(buffer_generation_ix_main_region_menu, draw_generation_ix_main_region_menu)
     draw_generation_ix_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
@@ -689,6 +730,7 @@ def update_display_generation_ix_main_region_menu(selected_index_generation_ix_m
     disp.show()
 
 def update_display_generation_i_moves_menu(selected_index_generation_i_moves_menu):
+    """ Creates generation 1 moves menu display """
     clear_buffer(buffer_generation_i_moves_menu, draw_generation_i_moves_menu)
     draw_generation_i_moves_menu.text((0, 0), "Moves:", fill=1)
 
@@ -721,9 +763,9 @@ def update_display_generation_i_moves_menu(selected_index_generation_i_moves_men
 
 while True:
 
-    if current_state == MAIN_MENU_STATE:
+    if CURRENT_STATE == MAIN_MENU_STATE:
         selected_index_main_menu = 0
-        total_main_menu_items = 3
+        TOTAL_MAIN_MENU_ITEMS = 3
         update_display_main_menu(selected_index_main_menu)
 
         selected_index_generations_menu = 0
@@ -732,24 +774,24 @@ while True:
             update_display_main_menu(selected_index_main_menu)
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_main_menu = (selected_index_main_menu - 1) % total_main_menu_items
+                selected_index_main_menu = (selected_index_main_menu - 1) % TOTAL_MAIN_MENU_ITEMS
                 if selected_index_main_menu < 0:
-                    selected_index_main_menu = total_main_menu_items - 1
+                    selected_index_main_menu = TOTAL_MAIN_MENU_ITEMS - 1
                 update_display_main_menu(selected_index_main_menu)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_main_menu = (selected_index_main_menu + 1) % total_main_menu_items
-                if selected_index_main_menu >= total_main_menu_items:
+                selected_index_main_menu = (selected_index_main_menu + 1) % TOTAL_MAIN_MENU_ITEMS
+                if selected_index_main_menu >= TOTAL_MAIN_MENU_ITEMS:
                     selected_index_main_menu = 0
                 update_display_main_menu(selected_index_main_menu)
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_main_menu == 0:
-                    current_state = GENERATIONS_MENU_STATE
+                    CURRENT_STATE = GENERATIONS_MENU_STATE
                     break
 
-    if current_state == GENERATIONS_MENU_STATE:
-        selected_index_generations_menu = 0
+    if CURRENT_STATE == GENERATIONS_MENU_STATE:
+        # selected_index_generations_menu = 0
         total_generations_menu_items = len(fetch_generation_data())
         update_display_generations_menu(selected_index_generations_menu)
 
@@ -769,38 +811,38 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generations_menu == 0:
-                    current_state = GENERATION_I_MENU_STATE
+                    CURRENT_STATE = GENERATION_I_MENU_STATE
                     break
                 if selected_index_generations_menu == 1:
-                    current_state = GENERATION_II_MENU_STATE
+                    CURRENT_STATE = GENERATION_II_MENU_STATE
                     break
                 if selected_index_generations_menu == 2:
-                    current_state = GENERATION_III_MENU_STATE
+                    CURRENT_STATE = GENERATION_III_MENU_STATE
                     break
                 if selected_index_generations_menu == 3:
-                    current_state = GENERATION_IV_MENU_STATE
+                    CURRENT_STATE = GENERATION_IV_MENU_STATE
                     break
                 if selected_index_generations_menu == 4:
-                    current_state = GENERATION_V_MENU_STATE
+                    CURRENT_STATE = GENERATION_V_MENU_STATE
                     break
                 if selected_index_generations_menu == 5:
-                    current_state = GENERATION_VI_MENU_STATE
+                    CURRENT_STATE = GENERATION_VI_MENU_STATE
                     break
                 if selected_index_generations_menu == 6:
-                    current_state = GENERATION_VII_MENU_STATE
+                    CURRENT_STATE = GENERATION_VII_MENU_STATE
                     break
                 if selected_index_generations_menu == 7:
-                    current_state = GENERATION_VIII_MENU_STATE
+                    CURRENT_STATE = GENERATION_VIII_MENU_STATE
                     break
                 if selected_index_generations_menu == 8:
-                    current_state = GENERATION_IX_MENU_STATE
+                    CURRENT_STATE = GENERATION_IX_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = MAIN_MENU_STATE
+                CURRENT_STATE = MAIN_MENU_STATE
                 break
 
-    if current_state == GENERATION_I_MENU_STATE:
+    if CURRENT_STATE == GENERATION_I_MENU_STATE:
         selected_index_generation_i_menu = 0
         total_generation_i_menu_items = 5
         update_display_generation_i_menu(selected_index_generation_i_menu)
@@ -821,17 +863,17 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_i_menu == 0:
-                    current_state = GENERATION_I_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_I_MAIN_REGION_MENU_STATE
                     break
                 if selected_index_generation_i_menu == 1:
-                    current_state = GENERATION_I_MOVES_MENU_STATE
+                    CURRENT_STATE = GENERATION_I_MOVES_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_II_MENU_STATE:
+    if CURRENT_STATE == GENERATION_II_MENU_STATE:
         selected_index_generation_ii_menu = 0
         total_generation_ii_menu_items = 5
         update_display_generation_ii_menu(selected_index_generation_ii_menu)
@@ -852,14 +894,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_ii_menu == 0:
-                    current_state = GENERATION_II_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_II_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_III_MENU_STATE:
+    if CURRENT_STATE == GENERATION_III_MENU_STATE:
         selected_index_generation_iii_menu = 0
         total_generation_iii_menu_items = 5
         update_display_generation_iii_menu(selected_index_generation_iii_menu)
@@ -880,14 +922,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_iii_menu == 0:
-                    current_state = GENERATION_III_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_III_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_IV_MENU_STATE:
+    if CURRENT_STATE == GENERATION_IV_MENU_STATE:
         selected_index_generation_iv_menu = 0
         total_generation_iv_menu_items = 5
         update_display_generation_iv_menu(selected_index_generation_iv_menu)
@@ -908,14 +950,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_iv_menu == 0:
-                    current_state = GENERATION_IV_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_IV_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_V_MENU_STATE:
+    if CURRENT_STATE == GENERATION_V_MENU_STATE:
         selected_index_generation_v_menu = 0
         total_generation_v_menu_items = 5
         update_display_generation_v_menu(selected_index_generation_v_menu)
@@ -936,14 +978,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_v_menu == 0:
-                    current_state = GENERATION_V_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_V_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_VI_MENU_STATE:
+    if CURRENT_STATE == GENERATION_VI_MENU_STATE:
         selected_index_generation_vi_menu = 0
         total_generation_vi_menu_items = 5
         update_display_generation_vi_menu(selected_index_generation_vi_menu)
@@ -964,14 +1006,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_vi_menu == 0:
-                    current_state = GENERATION_VI_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_VI_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_VII_MENU_STATE:
+    if CURRENT_STATE == GENERATION_VII_MENU_STATE:
         selected_index_generation_vii_menu = 0
         total_generation_vii_menu_items = 5
         update_display_generation_vii_menu(selected_index_generation_vii_menu)
@@ -992,14 +1034,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_vii_menu == 0:
-                    current_state = GENERATION_VII_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_VII_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_VIII_MENU_STATE:
+    if CURRENT_STATE == GENERATION_VIII_MENU_STATE:
         selected_index_generation_viii_menu = 0
         total_generation_viii_menu_items = 5
         update_display_generation_viii_menu(selected_index_generation_viii_menu)
@@ -1020,14 +1062,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_viii_menu == 0:
-                    current_state = GENERATION_VIII_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_VIII_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_IX_MENU_STATE:
+    if CURRENT_STATE == GENERATION_IX_MENU_STATE:
         selected_index_generation_ix_menu = 0
         total_generation_ix_menu_items = 5
         update_display_generation_ix_menu(selected_index_generation_ix_menu)
@@ -1048,14 +1090,14 @@ while True:
             if not button_A.value:
                 print("Button A Pressed")
                 if selected_index_generation_ix_menu == 0:
-                    current_state = GENERATION_IX_MAIN_REGION_MENU_STATE
+                    CURRENT_STATE = GENERATION_IX_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATIONS_MENU_STATE
+                CURRENT_STATE = GENERATIONS_MENU_STATE
                 break
 
-    if current_state == GENERATION_I_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_I_MAIN_REGION_MENU_STATE:
         selected_index_generation_i_main_region_menu = 0
         generation_i_data = fetch_generation_i_data()
         main_region_data = [generation_i_data["main_region"]]
@@ -1077,10 +1119,10 @@ while True:
                 update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_I_MENU_STATE
+                CURRENT_STATE = GENERATION_I_MENU_STATE
                 break
 
-    if current_state == GENERATION_II_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_II_MAIN_REGION_MENU_STATE:
         selected_index_generation_ii_main_region_menu = 0
         generation_ii_data = fetch_generation_ii_data()
         main_region_data = [generation_ii_data["main_region"]]
@@ -1102,10 +1144,10 @@ while True:
                 update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_II_MENU_STATE
+                CURRENT_STATE = GENERATION_II_MENU_STATE
                 break
 
-    if current_state == GENERATION_III_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_III_MAIN_REGION_MENU_STATE:
         selected_index_generation_iii_main_region_menu = 0
         generation_iii_data = fetch_generation_iii_data()
         main_region_data = [generation_iii_data["main_region"]]
@@ -1127,10 +1169,10 @@ while True:
                 update_display_generation_iii_main_region_menu(selected_index_generation_iii_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_III_MENU_STATE
+                CURRENT_STATE = GENERATION_III_MENU_STATE
                 break
 
-    if current_state == GENERATION_IV_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_IV_MAIN_REGION_MENU_STATE:
         selected_index_generation_iv_main_region_menu = 0
         generation_iv_data = fetch_generation_iv_data()
         main_region_data = [generation_iv_data["main_region"]]
@@ -1152,10 +1194,10 @@ while True:
                 update_display_generation_iv_main_region_menu(selected_index_generation_iv_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_IV_MENU_STATE
+                CURRENT_STATE = GENERATION_IV_MENU_STATE
                 break
 
-    if current_state == GENERATION_V_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_V_MAIN_REGION_MENU_STATE:
         selected_index_generation_v_main_region_menu = 0
         generation_v_data = fetch_generation_v_data()
         main_region_data = [generation_v_data["main_region"]]
@@ -1177,10 +1219,10 @@ while True:
                 update_display_generation_v_main_region_menu(selected_index_generation_v_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_V_MENU_STATE
+                CURRENT_STATE = GENERATION_V_MENU_STATE
                 break
 
-    if current_state == GENERATION_VI_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_VI_MAIN_REGION_MENU_STATE:
         selected_index_generation_vi_main_region_menu = 0
         generation_vi_data = fetch_generation_vi_data()
         main_region_data = [generation_vi_data["main_region"]]
@@ -1202,10 +1244,10 @@ while True:
                 update_display_generation_vi_main_region_menu(selected_index_generation_vi_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_VI_MENU_STATE
+                CURRENT_STATE = GENERATION_VI_MENU_STATE
                 break
 
-    if current_state == GENERATION_VII_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_VII_MAIN_REGION_MENU_STATE:
         selected_index_generation_vii_main_region_menu = 0
         generation_vii_data = fetch_generation_vii_data()
         main_region_data = [generation_vii_data["main_region"]]
@@ -1227,10 +1269,10 @@ while True:
                 update_display_generation_vii_main_region_menu(selected_index_generation_vii_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_VII_MENU_STATE
+                CURRENT_STATE = GENERATION_VII_MENU_STATE
                 break
 
-    if current_state == GENERATION_VIII_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_VIII_MAIN_REGION_MENU_STATE:
         selected_index_generation_viii_main_region_menu = 0
         generation_viii_data = fetch_generation_viii_data()
         main_region_data = [generation_viii_data["main_region"]]
@@ -1252,10 +1294,10 @@ while True:
                 update_display_generation_viii_main_region_menu(selected_index_generation_viii_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_VIII_MENU_STATE
+                CURRENT_STATE = GENERATION_VIII_MENU_STATE
                 break
 
-    if current_state == GENERATION_IX_MAIN_REGION_MENU_STATE:
+    if CURRENT_STATE == GENERATION_IX_MAIN_REGION_MENU_STATE:
         selected_index_generation_ix_main_region_menu = 0
         generation_ix_data = fetch_generation_ix_data()
         main_region_data = [generation_ix_data["main_region"]]
@@ -1277,10 +1319,10 @@ while True:
                 update_display_generation_ix_main_region_menu(selected_index_generation_ix_main_region_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_IX_MENU_STATE
+                CURRENT_STATE = GENERATION_IX_MENU_STATE
                 break
 
-    if current_state == GENERATION_I_MOVES_MENU_STATE:
+    if CURRENT_STATE == GENERATION_I_MOVES_MENU_STATE:
         selected_index_generation_i_moves_menu = 0
         generation_i_data = fetch_generation_i_data()
         moves_data = generation_i_data.get("moves", [])
@@ -1302,5 +1344,5 @@ while True:
                 update_display_generation_i_moves_menu(selected_index_generation_i_moves_menu)
             if not button_B.value:
                 print("Button B Pressed")
-                current_state = GENERATION_I_MENU_STATE
+                CURRENT_STATE = GENERATION_I_MENU_STATE
                 break
