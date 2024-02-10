@@ -308,7 +308,7 @@ def update_display_generations_menu(selected_index):
     draw_generations_menu.text((0, 0), "Generations:", fill=1)
 
     display_count = 5
-    total_generations_menu_items = len(fetch_generation_data())
+    # total_generations_menu_items = len(fetch_generation_data())
     start_index_generations_menu = 0
     max_visible_items = min(display_count, total_generations_menu_items - start_index_generations_menu)
 
@@ -739,7 +739,7 @@ def update_display_generation_i_moves_menu(selected_index):
     moves_data = generation_i_data.get("moves", [])
     total_generation_i_moves_menu_items = len(moves_data)
     start_index_generation_i_moves_menu = 0
-    max_visible_items = min(display_count, total_generation_i_menu_items - start_index_generation_i_moves_menu)
+    max_visible_items = min(display_count, TOTAL_GENERATION_I_MENU_ITEMS - start_index_generation_i_moves_menu)
 
     # Handle wrapping when reaching beginning and end of buffer display
     if selected_index < start_index_generation_i_moves_menu:
@@ -767,8 +767,6 @@ while True:
         SELECTED_INDEX_MAIN_MENU = 0
         TOTAL_MAIN_MENU_ITEMS = 3
         update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
-
-        # selected_index_generations_menu = 0
 
         while True:
             update_display_main_menu(SELECTED_INDEX_MAIN_MENU)
@@ -843,29 +841,29 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_I_MENU_STATE:
-        selected_index_generation_i_menu = 0
-        total_generation_i_menu_items = 5
-        update_display_generation_i_menu(selected_index_generation_i_menu)
+        SELECTED_INDEX_GENERATION_I_MENU = 0
+        TOTAL_GENERATION_I_MENU_ITEMS = 5
+        update_display_generation_i_menu(SELECTED_INDEX_GENERATION_I_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_i_menu = (selected_index_generation_i_menu - 1) % total_generation_i_menu_items
-                if selected_index_generation_i_menu < 0:
-                    selected_index_generation_i_menu = total_generation_i_menu_items - 1
-                update_display_generation_i_menu(selected_index_generation_i_menu)
+                SELECTED_INDEX_GENERATION_I_MENU = (SELECTED_INDEX_GENERATION_I_MENU - 1) % TOTAL_GENERATION_I_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_I_MENU < 0:
+                    SELECTED_INDEX_GENERATION_I_MENU = TOTAL_GENERATION_I_MENU_ITEMS - 1
+                update_display_generation_i_menu(SELECTED_INDEX_GENERATION_I_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_i_menu = (selected_index_generation_i_menu + 1) % total_generation_i_menu_items
-                if selected_index_generation_i_menu >= total_generation_i_menu_items:
-                    selected_index_generation_i_menu = 0
-                update_display_generation_i_menu(selected_index_generation_i_menu)
+                SELECTED_INDEX_GENERATION_I_MENU = (SELECTED_INDEX_GENERATION_I_MENU + 1) % TOTAL_GENERATION_I_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_I_MENU >= TOTAL_GENERATION_I_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_I_MENU = 0
+                update_display_generation_i_menu(SELECTED_INDEX_GENERATION_I_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_i_menu == 0:
+                if SELECTED_INDEX_GENERATION_I_MENU == 0:
                     CURRENT_STATE = GENERATION_I_MAIN_REGION_MENU_STATE
                     break
-                if selected_index_generation_i_menu == 1:
+                if SELECTED_INDEX_GENERATION_I_MENU == 1:
                     CURRENT_STATE = GENERATION_I_MOVES_MENU_STATE
                     break
             if not button_B.value:
@@ -874,26 +872,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_II_MENU_STATE:
-        selected_index_generation_ii_menu = 0
-        total_generation_ii_menu_items = 5
-        update_display_generation_ii_menu(selected_index_generation_ii_menu)
+        SELECTED_INDEX_GENERATION_II_MENU = 0
+        TOTAL_GENERATION_II_MENU_ITEMS = 5
+        update_display_generation_ii_menu(SELECTED_INDEX_GENERATION_II_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_ii_menu = (selected_index_generation_ii_menu - 1) % total_generation_ii_menu_items
-                if selected_index_generation_ii_menu < 0:
-                    selected_index_generation_ii_menu = total_generation_ii_menu_items - 1
-                update_display_generation_ii_menu(selected_index_generation_ii_menu)
+                SELECTED_INDEX_GENERATION_II_MENU = (SELECTED_INDEX_GENERATION_II_MENU - 1) % TOTAL_GENERATION_II_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_II_MENU < 0:
+                    SELECTED_INDEX_GENERATION_II_MENU = TOTAL_GENERATION_II_MENU_ITEMS - 1
+                update_display_generation_ii_menu(SELECTED_INDEX_GENERATION_II_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_ii_menu = (selected_index_generation_ii_menu + 1) % total_generation_ii_menu_items
-                if selected_index_generation_ii_menu >= total_generation_ii_menu_items:
-                    selected_index_generation_ii_menu = 0
-                update_display_generation_ii_menu(selected_index_generation_ii_menu)
+                SELECTED_INDEX_GENERATION_II_MENU = (SELECTED_INDEX_GENERATION_II_MENU + 1) % TOTAL_GENERATION_II_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_II_MENU >= TOTAL_GENERATION_II_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_II_MENU = 0
+                update_display_generation_ii_menu(SELECTED_INDEX_GENERATION_II_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_ii_menu == 0:
+                if SELECTED_INDEX_GENERATION_II_MENU == 0:
                     CURRENT_STATE = GENERATION_II_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -902,26 +900,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_III_MENU_STATE:
-        selected_index_generation_iii_menu = 0
-        total_generation_iii_menu_items = 5
-        update_display_generation_iii_menu(selected_index_generation_iii_menu)
+        SELECTED_INDEX_GENERATION_III_MENU = 0
+        TOTAL_GENERATION_III_MENU_ITEMS = 5
+        update_display_generation_iii_menu(SELECTED_INDEX_GENERATION_III_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_iii_menu = (selected_index_generation_iii_menu - 1) % total_generation_iii_menu_items
-                if selected_index_generation_iii_menu < 0:
-                    selected_index_generation_iii_menu = total_generation_iii_menu_items - 1
-                update_display_generation_iii_menu(selected_index_generation_iii_menu)
+                SELECTED_INDEX_GENERATION_III_MENU = (SELECTED_INDEX_GENERATION_III_MENU - 1) % TOTAL_GENERATION_III_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_III_MENU < 0:
+                    SELECTED_INDEX_GENERATION_III_MENU = TOTAL_GENERATION_III_MENU_ITEMS - 1
+                update_display_generation_iii_menu(SELECTED_INDEX_GENERATION_III_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_iii_menu = (selected_index_generation_iii_menu + 1) % total_generation_iii_menu_items
-                if selected_index_generation_iii_menu >= total_generation_iii_menu_items:
-                    selected_index_generation_iii_menu = 0
-                update_display_generation_iii_menu(selected_index_generation_iii_menu)
+                SELECTED_INDEX_GENERATION_III_MENU = (SELECTED_INDEX_GENERATION_III_MENU + 1) % TOTAL_GENERATION_III_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_III_MENU >= TOTAL_GENERATION_III_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_III_MENU = 0
+                update_display_generation_iii_menu(SELECTED_INDEX_GENERATION_III_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_iii_menu == 0:
+                if SELECTED_INDEX_GENERATION_III_MENU == 0:
                     CURRENT_STATE = GENERATION_III_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -930,26 +928,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_IV_MENU_STATE:
-        selected_index_generation_iv_menu = 0
-        total_generation_iv_menu_items = 5
-        update_display_generation_iv_menu(selected_index_generation_iv_menu)
+        SELECTED_INDEX_GENERATION_IV_MENU = 0
+        TOTAL_GENERATION_IV_MENU_ITEMS = 5
+        update_display_generation_iv_menu(SELECTED_INDEX_GENERATION_IV_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_iv_menu = (selected_index_generation_iv_menu - 1) % total_generation_iv_menu_items
-                if selected_index_generation_iv_menu < 0:
-                    selected_index_generation_iv_menu = total_generation_iv_menu_items - 1
-                update_display_generation_iv_menu(selected_index_generation_iv_menu)
+                SELECTED_INDEX_GENERATION_IV_MENU = (SELECTED_INDEX_GENERATION_IV_MENU - 1) % TOTAL_GENERATION_IV_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_IV_MENU < 0:
+                    SELECTED_INDEX_GENERATION_IV_MENU = TOTAL_GENERATION_IV_MENU_ITEMS - 1
+                update_display_generation_iv_menu(SELECTED_INDEX_GENERATION_IV_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_iv_menu = (selected_index_generation_iv_menu + 1) % total_generation_iv_menu_items
-                if selected_index_generation_iv_menu >= total_generation_iv_menu_items:
-                    selected_index_generation_iv_menu = 0
-                update_display_generation_iv_menu(selected_index_generation_iv_menu)
+                SELECTED_INDEX_GENERATION_IV_MENU = (SELECTED_INDEX_GENERATION_IV_MENU + 1) % TOTAL_GENERATION_IV_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_IV_MENU >= TOTAL_GENERATION_IV_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_IV_MENU = 0
+                update_display_generation_iv_menu(SELECTED_INDEX_GENERATION_IV_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_iv_menu == 0:
+                if SELECTED_INDEX_GENERATION_IV_MENU == 0:
                     CURRENT_STATE = GENERATION_IV_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -958,26 +956,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_V_MENU_STATE:
-        selected_index_generation_v_menu = 0
-        total_generation_v_menu_items = 5
-        update_display_generation_v_menu(selected_index_generation_v_menu)
+        SELECTED_INDEX_GENERATION_V_MENU = 0
+        TOTAL_GENERATION_V_MENU_ITEMS = 5
+        update_display_generation_v_menu(SELECTED_INDEX_GENERATION_V_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_v_menu = (selected_index_generation_v_menu - 1) % total_generation_v_menu_items
-                if selected_index_generation_v_menu < 0:
-                    selected_index_generation_v_menu = total_generation_v_menu_items - 1
-                update_display_generation_v_menu(selected_index_generation_v_menu)
+                SELECTED_INDEX_GENERATION_V_MENU = (SELECTED_INDEX_GENERATION_V_MENU - 1) % TOTAL_GENERATION_V_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_V_MENU < 0:
+                    SELECTED_INDEX_GENERATION_V_MENU = TOTAL_GENERATION_V_MENU_ITEMS - 1
+                update_display_generation_v_menu(SELECTED_INDEX_GENERATION_V_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_v_menu = (selected_index_generation_v_menu + 1) % total_generation_v_menu_items
-                if selected_index_generation_v_menu >= total_generation_v_menu_items:
-                    selected_index_generation_v_menu = 0
-                update_display_generation_v_menu(selected_index_generation_v_menu)
+                SELECTED_INDEX_GENERATION_V_MENU = (SELECTED_INDEX_GENERATION_V_MENU + 1) % TOTAL_GENERATION_V_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_V_MENU >= TOTAL_GENERATION_V_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_V_MENU = 0
+                update_display_generation_v_menu(SELECTED_INDEX_GENERATION_V_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_v_menu == 0:
+                if SELECTED_INDEX_GENERATION_V_MENU == 0:
                     CURRENT_STATE = GENERATION_V_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -986,26 +984,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_VI_MENU_STATE:
-        selected_index_generation_vi_menu = 0
-        total_generation_vi_menu_items = 5
-        update_display_generation_vi_menu(selected_index_generation_vi_menu)
+        SELECTED_INDEX_GENERATION_VI_MENU = 0
+        TOTAL_GENERATION_VI_MENU_ITEMS = 5
+        update_display_generation_vi_menu(SELECTED_INDEX_GENERATION_VI_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_vi_menu = (selected_index_generation_vi_menu - 1) % total_generation_vi_menu_items
-                if selected_index_generation_vi_menu < 0:
-                    selected_index_generation_vi_menu = total_generation_vi_menu_items - 1
-                update_display_generation_vi_menu(selected_index_generation_vi_menu)
+                SELECTED_INDEX_GENERATION_VI_MENU = (SELECTED_INDEX_GENERATION_VI_MENU - 1) % TOTAL_GENERATION_VI_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VI_MENU < 0:
+                    SELECTED_INDEX_GENERATION_VI_MENU = TOTAL_GENERATION_VI_MENU_ITEMS - 1
+                update_display_generation_vi_menu(SELECTED_INDEX_GENERATION_VI_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_vi_menu = (selected_index_generation_vi_menu + 1) % total_generation_vi_menu_items
-                if selected_index_generation_vi_menu >= total_generation_vi_menu_items:
-                    selected_index_generation_vi_menu = 0
-                update_display_generation_vi_menu(selected_index_generation_vi_menu)
+                SELECTED_INDEX_GENERATION_VI_MENU = (SELECTED_INDEX_GENERATION_VI_MENU + 1) % TOTAL_GENERATION_VI_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VI_MENU >= TOTAL_GENERATION_VI_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_VI_MENU = 0
+                update_display_generation_vi_menu(SELECTED_INDEX_GENERATION_VI_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_vi_menu == 0:
+                if SELECTED_INDEX_GENERATION_VI_MENU == 0:
                     CURRENT_STATE = GENERATION_VI_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -1014,26 +1012,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_VII_MENU_STATE:
-        selected_index_generation_vii_menu = 0
-        total_generation_vii_menu_items = 5
-        update_display_generation_vii_menu(selected_index_generation_vii_menu)
+        SELECTED_INDEX_GENERATION_VII_MENU = 0
+        TOTAL_GENERATION_VII_MENU_ITEMS = 5
+        update_display_generation_vii_menu(SELECTED_INDEX_GENERATION_VII_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_vii_menu = (selected_index_generation_vii_menu - 1) % total_generation_vii_menu_items
-                if selected_index_generation_vii_menu < 0:
-                    selected_index_generation_vii_menu = total_generation_vii_menu_items - 1
-                update_display_generation_vii_menu(selected_index_generation_vii_menu)
+                SELECTED_INDEX_GENERATION_VII_MENU = (SELECTED_INDEX_GENERATION_VII_MENU - 1) % TOTAL_GENERATION_VII_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VII_MENU < 0:
+                    SELECTED_INDEX_GENERATION_VII_MENU = TOTAL_GENERATION_VII_MENU_ITEMS - 1
+                update_display_generation_vii_menu(SELECTED_INDEX_GENERATION_VII_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_vii_menu = (selected_index_generation_vii_menu + 1) % total_generation_vii_menu_items
-                if selected_index_generation_vii_menu >= total_generation_vii_menu_items:
-                    selected_index_generation_vii_menu = 0
-                update_display_generation_vii_menu(selected_index_generation_vii_menu)
+                SELECTED_INDEX_GENERATION_VII_MENU = (SELECTED_INDEX_GENERATION_VII_MENU + 1) % TOTAL_GENERATION_VII_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VII_MENU >= TOTAL_GENERATION_VII_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_VII_MENU = 0
+                update_display_generation_vii_menu(SELECTED_INDEX_GENERATION_VII_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_vii_menu == 0:
+                if SELECTED_INDEX_GENERATION_VII_MENU == 0:
                     CURRENT_STATE = GENERATION_VII_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -1042,26 +1040,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_VIII_MENU_STATE:
-        selected_index_generation_viii_menu = 0
-        total_generation_viii_menu_items = 5
-        update_display_generation_viii_menu(selected_index_generation_viii_menu)
+        SELECTED_INDEX_GENERATION_VIII_MENU = 0
+        TOTAL_GENERATION_VIII_MENU_ITEMS = 5
+        update_display_generation_viii_menu(SELECTED_INDEX_GENERATION_VIII_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_viii_menu = (selected_index_generation_viii_menu - 1) % total_generation_viii_menu_items
-                if selected_index_generation_viii_menu < 0:
-                    selected_index_generation_viii_menu = total_generation_viii_menu_items - 1
-                update_display_generation_viii_menu(selected_index_generation_viii_menu)
+                SELECTED_INDEX_GENERATION_VIII_MENU = (SELECTED_INDEX_GENERATION_VIII_MENU - 1) % TOTAL_GENERATION_VIII_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VIII_MENU < 0:
+                    SELECTED_INDEX_GENERATION_VIII_MENU = TOTAL_GENERATION_VIII_MENU_ITEMS - 1
+                update_display_generation_viii_menu(SELECTED_INDEX_GENERATION_VIII_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_viii_menu = (selected_index_generation_viii_menu + 1) % total_generation_viii_menu_items
-                if selected_index_generation_viii_menu >= total_generation_viii_menu_items:
-                    selected_index_generation_viii_menu = 0
-                update_display_generation_viii_menu(selected_index_generation_viii_menu)
+                SELECTED_INDEX_GENERATION_VIII_MENU = (SELECTED_INDEX_GENERATION_VIII_MENU + 1) % TOTAL_GENERATION_VIII_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VIII_MENU >= TOTAL_GENERATION_VIII_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_VIII_MENU = 0
+                update_display_generation_viii_menu(SELECTED_INDEX_GENERATION_VIII_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_viii_menu == 0:
+                if SELECTED_INDEX_GENERATION_VIII_MENU == 0:
                     CURRENT_STATE = GENERATION_VIII_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -1070,26 +1068,26 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_IX_MENU_STATE:
-        selected_index_generation_ix_menu = 0
-        total_generation_ix_menu_items = 5
-        update_display_generation_ix_menu(selected_index_generation_ix_menu)
+        SELECTED_INDEX_GENERATION_IX_MENU = 0
+        TOTAL_GENERATION_IX_MENU_ITEMS = 5
+        update_display_generation_ix_menu(SELECTED_INDEX_GENERATION_IX_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_ix_menu = (selected_index_generation_ix_menu - 1) % total_generation_ix_menu_items
-                if selected_index_generation_ix_menu < 0:
-                    selected_index_generation_ix_menu = total_generation_ix_menu_items - 1
-                update_display_generation_ix_menu(selected_index_generation_ix_menu)
+                SELECTED_INDEX_GENERATION_IX_MENU = (SELECTED_INDEX_GENERATION_IX_MENU - 1) % TOTAL_GENERATION_IX_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_IX_MENU < 0:
+                    SELECTED_INDEX_GENERATION_IX_MENU = TOTAL_GENERATION_IX_MENU_ITEMS - 1
+                update_display_generation_ix_menu(SELECTED_INDEX_GENERATION_IX_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_ix_menu = (selected_index_generation_ix_menu + 1) % total_generation_ix_menu_items
-                if selected_index_generation_ix_menu >= total_generation_ix_menu_items:
-                    selected_index_generation_ix_menu = 0
-                update_display_generation_ix_menu(selected_index_generation_ix_menu)
+                SELECTED_INDEX_GENERATION_IX_MENU = (SELECTED_INDEX_GENERATION_IX_MENU + 1) % TOTAL_GENERATION_IX_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_IX_MENU >= TOTAL_GENERATION_IX_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_IX_MENU = 0
+                update_display_generation_ix_menu(SELECTED_INDEX_GENERATION_IX_MENU)
             if not button_A.value:
                 print("Button A Pressed")
-                if selected_index_generation_ix_menu == 0:
+                if SELECTED_INDEX_GENERATION_IX_MENU == 0:
                     CURRENT_STATE = GENERATION_IX_MAIN_REGION_MENU_STATE
                     break
             if not button_B.value:
@@ -1098,250 +1096,250 @@ while True:
                 break
 
     if CURRENT_STATE == GENERATION_I_MAIN_REGION_MENU_STATE:
-        selected_index_generation_i_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU = 0
         generation_i_data = fetch_generation_i_data()
         main_region_data = [generation_i_data["main_region"]]
-        total_generation_i_main_region_menu_items = len(main_region_data)
-        update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
+        TOTAL_GENERATION_I_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_i_main_region_menu(SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_i_main_region_menu = (selected_index_generation_i_main_region_menu - 1) % total_generation_i_main_region_menu_items
-                if selected_index_generation_i_main_region_menu < 0:
-                    selected_index_generation_i_main_region_menu = total_generation_i_main_region_menu_items - 1
-                update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
+                SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_I_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU = TOTAL_GENERATION_I_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_i_main_region_menu(SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_i_main_region_menu = (selected_index_generation_i_main_region_menu + 1) % total_generation_i_main_region_menu_items
-                if selected_index_generation_i_main_region_menu >= total_generation_i_main_region_menu_items:
-                    selected_index_generation_i_main_region_menu = 0
-                update_display_generation_i_main_region_menu(selected_index_generation_i_main_region_menu)
+                SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_I_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU >= TOTAL_GENERATION_I_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU = 0
+                update_display_generation_i_main_region_menu(SELECTED_INDEX_GENERATION_I_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_I_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_II_MAIN_REGION_MENU_STATE:
-        selected_index_generation_ii_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU = 0
         generation_ii_data = fetch_generation_ii_data()
         main_region_data = [generation_ii_data["main_region"]]
-        total_generation_ii_main_region_menu_items = len(main_region_data)
-        update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
+        TOTAL_GENERATION_II_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_ii_main_region_menu(SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_ii_main_region_menu = (selected_index_generation_ii_main_region_menu - 1) % total_generation_ii_main_region_menu_items
-                if selected_index_generation_ii_main_region_menu < 0:
-                    selected_index_generation_ii_main_region_menu = total_generation_ii_main_region_menu_items - 1
-                update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
+                SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_II_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU = TOTAL_GENERATION_II_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_ii_main_region_menu(SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_ii_main_region_menu = (selected_index_generation_ii_main_region_menu + 1) % total_generation_ii_main_region_menu_items
-                if selected_index_generation_ii_main_region_menu >= total_generation_ii_main_region_menu_items:
-                    selected_index_generation_ii_main_region_menu = 0
-                update_display_generation_ii_main_region_menu(selected_index_generation_ii_main_region_menu)
+                SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_II_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU >= TOTAL_GENERATION_II_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU = 0
+                update_display_generation_ii_main_region_menu(SELECTED_INDEX_GENERATION_II_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_II_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_III_MAIN_REGION_MENU_STATE:
-        selected_index_generation_iii_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU = 0
         generation_iii_data = fetch_generation_iii_data()
         main_region_data = [generation_iii_data["main_region"]]
-        total_generation_iii_main_region_menu_items = len(main_region_data)
-        update_display_generation_iii_main_region_menu(selected_index_generation_iii_main_region_menu)
+        TOTAL_GENERATION_III_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_iii_main_region_menu(SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_iii_main_region_menu = (selected_index_generation_iii_main_region_menu - 1) % total_generation_iii_main_region_menu_items
-                if selected_index_generation_iii_main_region_menu < 0:
-                    selected_index_generation_iii_main_region_menu = total_generation_iii_main_region_menu_items - 1
-                update_display_generation_iii_main_region_menu(selected_index_generation_iii_main_region_menu)
+                SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_III_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU = TOTAL_GENERATION_III_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_iii_main_region_menu(SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_iii_main_region_menu = (selected_index_generation_iii_main_region_menu + 1) % total_generation_iii_main_region_menu_items
-                if selected_index_generation_iii_main_region_menu >= total_generation_iii_main_region_menu_items:
-                    selected_index_generation_iii_main_region_menu = 0
-                update_display_generation_iii_main_region_menu(selected_index_generation_iii_main_region_menu)
+                SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_III_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU >= TOTAL_GENERATION_III_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU = 0
+                update_display_generation_iii_main_region_menu(SELECTED_INDEX_GENERATION_III_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_III_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_IV_MAIN_REGION_MENU_STATE:
-        selected_index_generation_iv_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU = 0
         generation_iv_data = fetch_generation_iv_data()
         main_region_data = [generation_iv_data["main_region"]]
-        total_generation_iv_main_region_menu_items = len(main_region_data)
-        update_display_generation_iv_main_region_menu(selected_index_generation_iv_main_region_menu)
+        TOTAL_GENERATION_IV_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_iv_main_region_menu(SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_iv_main_region_menu = (selected_index_generation_iv_main_region_menu - 1) % total_generation_iv_main_region_menu_items
-                if selected_index_generation_iv_main_region_menu < 0:
-                    selected_index_generation_iv_main_region_menu = total_generation_iv_main_region_menu_items - 1
-                update_display_generation_iv_main_region_menu(selected_index_generation_iv_main_region_menu)
+                SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_IV_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU = TOTAL_GENERATION_IV_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_iv_main_region_menu(SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_iv_main_region_menu = (selected_index_generation_iv_main_region_menu + 1) % total_generation_iv_main_region_menu_items
-                if selected_index_generation_iv_main_region_menu >= total_generation_iv_main_region_menu_items:
-                    selected_index_generation_iv_main_region_menu = 0
-                update_display_generation_iv_main_region_menu(selected_index_generation_iv_main_region_menu)
+                SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_IV_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU >= TOTAL_GENERATION_IV_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU = 0
+                update_display_generation_iv_main_region_menu(SELECTED_INDEX_GENERATION_IV_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_IV_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_V_MAIN_REGION_MENU_STATE:
-        selected_index_generation_v_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU = 0
         generation_v_data = fetch_generation_v_data()
         main_region_data = [generation_v_data["main_region"]]
-        total_generation_v_main_region_menu_items = len(main_region_data)
-        update_display_generation_v_main_region_menu(selected_index_generation_v_main_region_menu)
+        TOTAL_GENERATION_V_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_v_main_region_menu(SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_v_main_region_menu = (selected_index_generation_v_main_region_menu - 1) % total_generation_v_main_region_menu_items
-                if selected_index_generation_v_main_region_menu < 0:
-                    selected_index_generation_v_main_region_menu = total_generation_v_main_region_menu_items - 1
-                update_display_generation_v_main_region_menu(selected_index_generation_v_main_region_menu)
+                SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_V_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU = TOTAL_GENERATION_V_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_v_main_region_menu(SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_v_main_region_menu = (selected_index_generation_v_main_region_menu + 1) % total_generation_v_main_region_menu_items
-                if selected_index_generation_v_main_region_menu >= total_generation_v_main_region_menu_items:
-                    selected_index_generation_v_main_region_menu = 0
-                update_display_generation_v_main_region_menu(selected_index_generation_v_main_region_menu)
+                SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_V_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU >= TOTAL_GENERATION_V_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU = 0
+                update_display_generation_v_main_region_menu(SELECTED_INDEX_GENERATION_V_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_V_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_VI_MAIN_REGION_MENU_STATE:
-        selected_index_generation_vi_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU = 0
         generation_vi_data = fetch_generation_vi_data()
         main_region_data = [generation_vi_data["main_region"]]
-        total_generation_vi_main_region_menu_items = len(main_region_data)
-        update_display_generation_vi_main_region_menu(selected_index_generation_vi_main_region_menu)
+        TOTAL_GENERATION_VI_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_vi_main_region_menu(SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_vi_main_region_menu = (selected_index_generation_vi_main_region_menu - 1) % total_generation_vi_main_region_menu_items
-                if selected_index_generation_vi_main_region_menu < 0:
-                    selected_index_generation_vi_main_region_menu = total_generation_vi_main_region_menu_items - 1
-                update_display_generation_vi_main_region_menu(selected_index_generation_vi_main_region_menu)
+                SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_VI_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU = TOTAL_GENERATION_VI_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_vi_main_region_menu(SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_vi_main_region_menu = (selected_index_generation_vi_main_region_menu + 1) % total_generation_vi_main_region_menu_items
-                if selected_index_generation_vi_main_region_menu >= total_generation_vi_main_region_menu_items:
-                    selected_index_generation_vi_main_region_menu = 0
-                update_display_generation_vi_main_region_menu(selected_index_generation_vi_main_region_menu)
+                SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_VI_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU >= TOTAL_GENERATION_VI_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU = 0
+                update_display_generation_vi_main_region_menu(SELECTED_INDEX_GENERATION_VI_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_VI_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_VII_MAIN_REGION_MENU_STATE:
-        selected_index_generation_vii_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU = 0
         generation_vii_data = fetch_generation_vii_data()
         main_region_data = [generation_vii_data["main_region"]]
-        total_generation_vii_main_region_menu_items = len(main_region_data)
-        update_display_generation_vii_main_region_menu(selected_index_generation_vii_main_region_menu)
+        TOTAL_GENERATION_VII_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_vii_main_region_menu(SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_vii_main_region_menu = (selected_index_generation_vii_main_region_menu - 1) % total_generation_vii_main_region_menu_items
-                if selected_index_generation_vii_main_region_menu < 0:
-                    selected_index_generation_vii_main_region_menu = total_generation_vii_main_region_menu_items - 1
-                update_display_generation_vii_main_region_menu(selected_index_generation_vii_main_region_menu)
+                SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_VII_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU = TOTAL_GENERATION_VII_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_vii_main_region_menu(SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_vii_main_region_menu = (selected_index_generation_vii_main_region_menu + 1) % total_generation_vii_main_region_menu_items
-                if selected_index_generation_vii_main_region_menu >= total_generation_vii_main_region_menu_items:
-                    selected_index_generation_vii_main_region_menu = 0
-                update_display_generation_vii_main_region_menu(selected_index_generation_vii_main_region_menu)
+                SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_VII_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU >= TOTAL_GENERATION_VII_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU = 0
+                update_display_generation_vii_main_region_menu(SELECTED_INDEX_GENERATION_VII_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_VII_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_VIII_MAIN_REGION_MENU_STATE:
-        selected_index_generation_viii_main_region_menu = 0
+        SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU = 0
         generation_viii_data = fetch_generation_viii_data()
         main_region_data = [generation_viii_data["main_region"]]
-        total_generation_viii_main_region_menu_items = len(main_region_data)
-        update_display_generation_viii_main_region_menu(selected_index_generation_viii_main_region_menu)
+        TOTAL_GENERATION_VIII_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_viii_main_region_menu(SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_viii_main_region_menu = (selected_index_generation_viii_main_region_menu - 1) % total_generation_viii_main_region_menu_items
-                if selected_index_generation_viii_main_region_menu < 0:
-                    selected_index_generation_viii_main_region_menu = total_generation_viii_main_region_menu_items - 1
-                update_display_generation_viii_main_region_menu(selected_index_generation_viii_main_region_menu)
+                SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_VIII_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU = TOTAL_GENERATION_VIII_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_viii_main_region_menu(SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_viii_main_region_menu = (selected_index_generation_viii_main_region_menu + 1) % total_generation_viii_main_region_menu_items
-                if selected_index_generation_viii_main_region_menu >= total_generation_viii_main_region_menu_items:
-                    selected_index_generation_viii_main_region_menu = 0
-                update_display_generation_viii_main_region_menu(selected_index_generation_viii_main_region_menu)
+                SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU = (SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_VIII_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU >= TOTAL_GENERATION_VIII_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU = 0
+                update_display_generation_viii_main_region_menu(SELECTED_INDEX_GENERATION_VIII_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_VIII_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_IX_MAIN_REGION_MENU_STATE:
-        selected_index_generation_ix_main_region_menu = 0
+        SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU = 0
         generation_ix_data = fetch_generation_ix_data()
         main_region_data = [generation_ix_data["main_region"]]
-        total_generation_ix_main_region_menu_items = len(main_region_data)
-        update_display_generation_ix_main_region_menu(selected_index_generation_ix_main_region_menu)
+        TOTAL_GENERATION_IX_MAIN_REGION_MENU_ITEMS = len(main_region_data)
+        update_display_generation_ix_main_region_menu(SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_ix_main_region_menu = (selected_index_generation_ix_main_region_menu - 1) % total_generation_ix_main_region_menu_items
-                if selected_index_generation_ix_main_region_menu < 0:
-                    selected_index_generation_ix_main_region_menu = total_generation_ix_main_region_menu_items - 1
-                update_display_generation_ix_main_region_menu(selected_index_generation_ix_main_region_menu)
+                SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU = (SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU - 1) % TOTAL_GENERATION_IX_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU < 0:
+                    SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU = TOTAL_GENERATION_IX_MAIN_REGION_MENU_ITEMS - 1
+                update_display_generation_ix_main_region_menu(SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_ix_main_region_menu = (selected_index_generation_ix_main_region_menu + 1) % total_generation_ix_main_region_menu_items
-                if selected_index_generation_ix_main_region_menu >= total_generation_ix_main_region_menu_items:
-                    selected_index_generation_ix_main_region_menu = 0
-                update_display_generation_ix_main_region_menu(selected_index_generation_ix_main_region_menu)
+                SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU = (SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU + 1) % TOTAL_GENERATION_IX_MAIN_REGION_MENU_ITEMS
+                if SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU >= TOTAL_GENERATION_IX_MAIN_REGION_MENU_ITEMS:
+                    SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU = 0
+                update_display_generation_ix_main_region_menu(SELECTED_INDEC_GENERATION_IX_MAIN_REGION_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_IX_MENU_STATE
                 break
 
     if CURRENT_STATE == GENERATION_I_MOVES_MENU_STATE:
-        selected_index_generation_i_moves_menu = 0
+        SELECTED_INDEX_GENERATION_I_MOVES_MENU = 0
         generation_i_data = fetch_generation_i_data()
         moves_data = generation_i_data.get("moves", [])
         total_generation_i_moves_menu_items = len(moves_data)
-        update_display_generation_i_moves_menu(selected_index_generation_i_moves_menu)
+        update_display_generation_i_moves_menu(SELECTED_INDEX_GENERATION_I_MOVES_MENU)
 
         while True:
             if not button_U.value:
                 print("Button U Pressed")
-                selected_index_generation_i_moves_menu = (selected_index_generation_i_moves_menu - 1) % total_generation_i_moves_menu_items
-                if selected_index_generation_i_moves_menu < 0:
-                    selected_index_generation_i_moves_menu = total_generation_i_moves_menu_items - 1
-                update_display_generation_i_moves_menu(selected_index_generation_i_moves_menu)
+                SELECTED_INDEX_GENERATION_I_MOVES_MENU = (SELECTED_INDEX_GENERATION_I_MOVES_MENU - 1) % total_generation_i_moves_menu_items
+                if SELECTED_INDEX_GENERATION_I_MOVES_MENU < 0:
+                    SELECTED_INDEX_GENERATION_I_MOVES_MENU = total_generation_i_moves_menu_items - 1
+                update_display_generation_i_moves_menu(SELECTED_INDEX_GENERATION_I_MOVES_MENU)
             if not button_D.value:
                 print("Button D Pressed")
-                selected_index_generation_i_moves_menu = (selected_index_generation_i_moves_menu + 1) % total_generation_i_moves_menu_items
-                if selected_index_generation_i_moves_menu >= total_generation_i_moves_menu_items:
-                    selected_index_generation_i_moves_menu = 0
-                update_display_generation_i_moves_menu(selected_index_generation_i_moves_menu)
+                SELECTED_INDEX_GENERATION_I_MOVES_MENU = (SELECTED_INDEX_GENERATION_I_MOVES_MENU + 1) % total_generation_i_moves_menu_items
+                if SELECTED_INDEX_GENERATION_I_MOVES_MENU >= total_generation_i_moves_menu_items:
+                    SELECTED_INDEX_GENERATION_I_MOVES_MENU = 0
+                update_display_generation_i_moves_menu(SELECTED_INDEX_GENERATION_I_MOVES_MENU)
             if not button_B.value:
                 print("Button B Pressed")
                 CURRENT_STATE = GENERATION_I_MENU_STATE
