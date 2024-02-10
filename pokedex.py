@@ -753,7 +753,7 @@ def update_display_generation_i_moves_menu(selected_index):
 
             display_text = f"{move_name}"
 
-            if i + start_index_generation_i_moves_menu == selected:
+            if i + start_index_generation_i_moves_menu == selected_index:
                 display_text = f"# {display_text}"
 
             draw_generation_i_moves_menu.text((0, (i * 10) + 10), display_text, fill=1)
