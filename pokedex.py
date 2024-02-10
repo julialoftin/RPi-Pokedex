@@ -710,7 +710,7 @@ def update_display_generation_i_moves_menu(selected_index_generation_i_moves_men
 
             draw_generation_i_moves_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-    diap.image(buffer_generation_i_moves_menu)
+    disp.image(buffer_generation_i_moves_menu)
     disp.show()
 
 while True:
