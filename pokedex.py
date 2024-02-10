@@ -501,8 +501,8 @@ def update_display_generation_i_main_region_menu(selected_index):
     draw_generation_i_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_i_data = fetch_generation_i_data()
-    main_region_data = [generation_i_data["main_region"]]
+    # generation_i_data = fetch_generation_i_data()
+    # main_region_data = [generation_i_data["main_region"]]
     total_generation_i_main_region_menu_items = len(main_region_data)
     start_index_generation_i_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_i_main_region_menu_items - start_index_generation_i_main_region_menu)
@@ -527,8 +527,8 @@ def update_display_generation_ii_main_region_menu(selected_index):
     draw_generation_ii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_ii_data = fetch_generation_ii_data()
-    main_region_data = [generation_ii_data["main_region"]]
+    # generation_ii_data = fetch_generation_ii_data()
+    # main_region_data = [generation_ii_data["main_region"]]
     total_generation_ii_main_region_menu_items = len(main_region_data)
     start_index_generation_ii_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_ii_main_region_menu_items - start_index_generation_ii_main_region_menu)
@@ -553,8 +553,8 @@ def update_display_generation_iii_main_region_menu(selected_index):
     draw_generation_iii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_iii_data = fetch_generation_iii_data()
-    main_region_data = [generation_iii_data["main_region"]]
+    # generation_iii_data = fetch_generation_iii_data()
+    # main_region_data = [generation_iii_data["main_region"]]
     total_generation_iii_main_region_menu_items = len(main_region_data)
     start_index_generation_iii_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_iii_main_region_menu_items - start_index_generation_iii_main_region_menu)
@@ -579,8 +579,8 @@ def update_display_generation_iv_main_region_menu(selected_index):
     draw_generation_iv_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_iv_data = fetch_generation_iv_data()
-    main_region_data = [generation_iv_data["main_region"]]
+    # generation_iv_data = fetch_generation_iv_data()
+    # main_region_data = [generation_iv_data["main_region"]]
     total_generation_iv_main_region_menu_items = len(main_region_data)
     start_index_generation_iv_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_iv_main_region_menu_items - start_index_generation_iv_main_region_menu)
@@ -605,8 +605,8 @@ def update_display_generation_v_main_region_menu(selected_index):
     draw_generation_v_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_v_data = fetch_generation_v_data()
-    main_region_data = [generation_v_data["main_region"]]
+    # generation_v_data = fetch_generation_v_data()
+    # main_region_data = [generation_v_data["main_region"]]
     total_generation_v_main_region_menu_items = len(main_region_data)
     start_index_generation_v_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_v_main_region_menu_items - start_index_generation_v_main_region_menu)
@@ -631,8 +631,8 @@ def update_display_generation_vi_main_region_menu(selected_index):
     draw_generation_vi_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_vi_data = fetch_generation_vi_data()
-    main_region_data = [generation_vi_data["main_region"]]
+    # generation_vi_data = fetch_generation_vi_data()
+    # main_region_data = [generation_vi_data["main_region"]]
     total_generation_vi_main_region_menu_items = len(main_region_data)
     start_index_generation_vi_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_vi_main_region_menu_items - start_index_generation_vi_main_region_menu)
@@ -657,8 +657,8 @@ def update_display_generation_vii_main_region_menu(selected_index):
     draw_generation_vii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_vii_data = fetch_generation_vii_data()
-    main_region_data = [generation_vii_data["main_region"]]
+    # generation_vii_data = fetch_generation_vii_data()
+    # main_region_data = [generation_vii_data["main_region"]]
     total_generation_vii_main_region_menu_items = len(main_region_data)
     start_index_generation_vii_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_vii_main_region_menu_items - start_index_generation_vii_main_region_menu)
@@ -683,8 +683,8 @@ def update_display_generation_viii_main_region_menu(selected_index):
     draw_generation_viii_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_viii_data = fetch_generation_viii_data()
-    main_region_data = [generation_viii_data["main_region"]]
+    # generation_viii_data = fetch_generation_viii_data()
+    # main_region_data = [generation_viii_data["main_region"]]
     total_generation_viii_main_region_menu_items = len(main_region_data)
     start_index_generation_viii_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_viii_main_region_menu_items - start_index_generation_viii_main_region_menu)
@@ -709,8 +709,8 @@ def update_display_generation_ix_main_region_menu(selected_index):
     draw_generation_ix_main_region_menu.text((0, 0), "Main Regions:", fill=1)
 
     display_count = 5
-    generation_ix_data = fetch_generation_ix_data()
-    main_region_data = [generation_ix_data["main_region"]]
+    # generation_ix_data = fetch_generation_ix_data()
+    # main_region_data = [generation_ix_data["main_region"]]
     total_generation_ix_main_region_menu_items = len(main_region_data)
     start_index_generation_ix_main_region_menu = 0
     max_visible_items = min(display_count, total_generation_ix_main_region_menu_items - start_index_generation_ix_main_region_menu)
@@ -735,9 +735,9 @@ def update_display_generation_i_moves_menu(selected_index):
     draw_generation_i_moves_menu.text((0, 0), "Moves:", fill=1)
 
     display_count = 5
-    generation_i_data = fetch_generation_i_data()
-    moves_data = generation_i_data.get("moves", [])
-    total_generation_i_moves_menu_items = len(moves_data)
+    # generation_i_data = fetch_generation_i_data()
+    # moves_data = generation_i_data.get("moves", [])
+    # total_generation_i_moves_menu_items = len(moves_data)
     start_index_generation_i_moves_menu = 0
     max_visible_items = min(display_count, TOTAL_GENERATION_I_MENU_ITEMS - start_index_generation_i_moves_menu)
 
