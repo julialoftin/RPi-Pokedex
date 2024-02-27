@@ -2,9 +2,7 @@
 import board
 import busio
 from digitalio import DigitalInOut, Direction, Pull
-from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
-import requests
 
 # Creates the i2c interface
 i2c = busio.I2C(board.SCL, board.SDA)
