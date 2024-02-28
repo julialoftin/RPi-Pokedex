@@ -49,11 +49,16 @@ draw_generation_i_main_region = ImageDraw.Draw(buffer_generation_i_main_region)
 buffer_generation_i_moves = Image.new("1", (disp.width, disp.height))
 draw_generation_i_moves = ImageDraw.Draw(buffer_generation_i_moves)
 
+# Create an off-screen buffer and drawing object for Generation I Pokemon Species List
+buffer_generation_i_pokemon_species = Image.new("1", (disp.width, disp.height))
+draw_generation_i_pokemon_species = ImageDraw.Draw(buffer_generation_i_pokemon_species)
+
 # Define states
 MENU_STATE = 0
 GENERATION_I_STATE = 2
 GENERATION_I_MAIN_REGION_STATE = 11
 GENERATION_I_MOVES_STATE = 12
+GENERATION_I_POKEMON_SPECIES_STATE = 13
 GENERATION_II_STATE = 3
 GENERATION_III_STATE = 4
 GENERATION_IV_STATE = 5
@@ -74,9 +79,11 @@ start_index_menu = 0
 start_index_generation_i = 0
 start_index_generation_i_main_region = 0
 start_index_generation_i_moves = 0
+start_index_generation_i_pokemon_species = 0
 
 total_regions = 0
 selected_generation_i_main_region_index = 0
+selected_generation_i_pokemon_species_index = 0
 main_region_data = []
 
 def clear_buffer(buffer, draw):
@@ -179,6 +186,36 @@ def update_generation_i_moves_display(selected_generation_i_moves_index):
     disp.image(buffer_generation_i_moves)
     disp.show()
 
+def update_generation_i_pokemon_species_display(selected_generation_i_pokemon_species_index):
+    global start_index_generation_i_pokemon_species
+    clear_buffer(buffer_generation_i_pokemon_species, draw_generation_i_pokemon_species)
+    draw_generation_i_pokemon_species.text((0, 0), "Pokemon:", fill=1)
+
+    display_count = 5
+    max_visible_items = min(display_count, total_pokemon_species - start_index_generation_i_pokemon_species)
+
+    # Handle wrapping when reaching the end or beginning of the list
+    if selected_generation_i_pokemon_species_index < start_index_generation_i_pokemon_species:
+        start_index_generation_i_pokemon_species = selected_generation_i_pokemon_species_index
+    elif selected_generation_i_pokemon_species_index >= start_index_generation_i_pokemon_species + max_visible_items:
+        start_index_generation_i_pokemon_species = selected_generation_i_pokemon_species_index - max_visible_items + 1
+
+    for i in range(max_visible_items):
+        try:
+            pokemon_species_item = pokemon_species_data[start_index_generation_i_pokemon_species + i]
+            pokemon_species_name = pokemon_species_item.get("name", "")
+            display_text = f"{pokemon_species_name}"
+
+            if i + start_index_generation_i_pokemon_species == selected_generation_i_pokemon_species_index:
+                display_text = f"# {display_text}"
+
+            draw_generation_i_pokemon_species.text((0, (i * 10) + 10), display_text, fill=1)
+        except KeyError as e:
+            print(f"KeyError: {e}, pokemon_species_data: {pokemon_species_data}")
+
+    disp.image(buffer_generation_i_pokemon_species)
+    disp.show()
+
 def fetch_generation_i_main_region():
     global total_regions, main_region_data, selected_generation_i_main_region_index, current_state, update_display
     try:
@@ -207,8 +244,8 @@ def fetch_generation_1_moves():
                 total_moves = len(moves_data)
                 selected_generation_i_moves_index = 0
                 current_state = GENERATION_I_MOVES_STATE
-                update_display = True
                 print(f"Transitioning to GENERATION_I_MOVES_STATE")
+                update_generation_i_moves_display(selected_generation_i_moves_index)
                 return total_moves
             else:
                 print(f"Moves data is empty.")
@@ -216,6 +253,27 @@ def fetch_generation_1_moves():
             print(f"Failed to fetch moves data. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
+
+def fetch_generation_1_pokemon_species():
+    global pokemon_species_data, total_pokemon_species, selected_generation_i_pokemon_species_index, current_state, update_display
+    try:
+        response = requests.get(generation_i_api_url)
+        if response.status_code == 200:
+            data = response.json()
+            pokemon_species_data = data.get("pokemon_species", [])
+            if pokemon_species_data:
+                total_pokemon_species = len(pokemon_species_data)
+                selected_generation_i_pokemon_species_index = 0
+                current_state = GENERATION_I_POKEMON_SPECIES_STATE
+                print(f"Transitioning to GENERATION_I_POKEMON_SPECIES_STATE")
+                update_generation_i_pokemon_species_display(selected_generation_i_pokemon_species_index)
+                return total_pokemon_species
+            else:
+                print(f"Pokemon species is empty.")
+        else:
+            print(f"Failed to fetch pokemon species data. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print (f"An error occurred: {e}")
 
 while True:
     if current_state == MENU_STATE:
@@ -297,10 +355,16 @@ while True:
             if not button_A.value:
                 if selected_generation_i_index == 0:
                     print(f"Selected Index: {selected_generation_i_index}")
+                    current_state = GENERATION_I_MAIN_REGION_STATE                    
                     fetch_generation_i_main_region()
                 elif selected_generation_i_index == 1:
                     print(f"Selected Index: {selected_generation_i_index}")
+                    current_state = GENERATION_I_MOVES_STATE                    
                     fetch_generation_1_moves()
+                elif selected_generation_i_index == 2:
+                    print(f"Selected Index: {selected_generation_i_index}")
+                    current_state = GENERATION_I_POKEMON_SPECIES_STATE
+                    fetch_generation_1_pokemon_species()
 
             # Looping display for end and beginning
             if selected_generation_i_index == 0:
@@ -313,15 +377,20 @@ while True:
                 update_generation_i_display(selected_generation_i_index)
                 update_display = True
 
-            elif not button_A.value and selected_generation_i_index == 0:
-                current_state = GENERATION_I_MAIN_REGION_STATE
-                update_display = True
-                break
+            # elif not button_A.value and selected_generation_i_index == 0:
+            #     current_state = GENERATION_I_MAIN_REGION_STATE
+            #     update_display = True
+            #     break
 
-            elif not button_A.value and selected_generation_i_moves_index == 0:
-                current_state = GENERATION_I_MOVES_STATE
-                update_display = True
-                break
+            # elif not button_A.value and selected_generation_i_moves_index == 0:
+            #     current_state = GENERATION_I_MOVES_STATE
+            #     update_display = True
+            #     break
+
+            # elif not button_A.value and selected_generation_i_pokemon_species_index == 0:
+            #     current_state = GENERATION_I_POKEMON_SPECIES_STATE
+            #     update_display = True
+            #     break
 
     elif current_state == GENERATION_I_MAIN_REGION_STATE:
         print("In GENERATION_I_MAIN_REGION_STATE")
@@ -358,8 +427,8 @@ while True:
         print(f"In GENERATION_I_MOVES_STATE")
         selected_generation_i_moves_index = 0
         total_moves = fetch_generation_1_moves()
-        while True:
 
+        while True:
             if update_display:
                 update_generation_i_moves_display(selected_generation_i_moves_index)
                 update_display = False
@@ -381,6 +450,38 @@ while True:
                 update_display = True
 
             elif not button_B.value:
+                current_state = GENERATION_I_STATE
+                update_display = True
+                break
+    
+    elif current_state == GENERATION_I_POKEMON_SPECIES_STATE:
+        print(f"In GENERATION_I_POKEMON_SPECIES_STATE")
+        selected_generation_i_pokemon_species_index = 0
+        total_pokemon_species = fetch_generation_1_pokemon_species()
+
+        while True:
+            if update_display:
+                update_generation_i_pokemon_species_display(selected_generation_i_pokemon_species_index)
+                update_display = False
+
+            if not button_U.value:
+                selected_generation_i_pokemon_species_index = (
+                    selected_generation_i_pokemon_species_index - 1
+                ) % total_pokemon_species # Scroll up
+                if selected_generation_i_pokemon_species_index < 0:
+                    selected_generation_i_pokemon_species_index = total_pokemon_species - 1
+                update_display = True
+
+            elif not button_D.value:
+                selected_generation_i_pokemon_species_index = (
+                    selected_generation_i_pokemon_species_index + 1
+                ) % total_pokemon_species # Scroll down
+                if selected_generation_i_pokemon_species_index >= total_pokemon_species:
+                    selected_generation_i_pokemon_species_index = 0
+                update_display = True
+
+            elif not button_B.value:
+                print("Transitioning back to GENERATION_I_STATE from POKEMON_SPECIES_STATE")
                 current_state = GENERATION_I_STATE
                 update_display = True
                 break
