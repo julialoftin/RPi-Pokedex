@@ -74,8 +74,6 @@ from fetch_api_data import (
 )
 
 
-# API URLs
-
 # Define states
 MAIN_MENU_STATE = 0
 GENERATIONS_MENU_STATE = 1
@@ -130,9 +128,9 @@ START_INDEX_GENERATION_IX_MAIN_REGION_MENU = 0
 START_INDEX_GENERATION_I_MOVES_MENU = 0
 
 
-def clear_buffer(buffer, draw):
-    """Clears screen for drawing"""
-    draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
+# def clear_buffer(buffer, draw):
+#     """Clears screen for drawing"""
+#     draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
 
 
 def update_display_main_menu(selected_index):
@@ -154,40 +152,40 @@ def update_display_main_menu(selected_index):
     disp.show()
 
 
-def update_display_generations_menu(selected_index):
-    """Creates generations menu display"""
-    clear_buffer(buffer_generations_menu, draw_generations_menu)
-    draw_generations_menu.text((0, 0), "Generations:", fill=1)
+# def update_display_generations_menu(selected_index):
+#     """Creates generations menu display"""
+#     clear_buffer(buffer_generations_menu, draw_generations_menu)
+#     draw_generations_menu.text((0, 0), "Generations:", fill=1)
 
-    display_count = 5
-    # total_generations_menu_items = len(fetch_generation_data())
-    start_index_generations_menu = 0
-    max_visible_items = min(
-        display_count, total_generations_menu_items - start_index_generations_menu
-    )
+#     display_count = 5
+#     # total_generations_menu_items = len(fetch_generation_data())
+#     start_index_generations_menu = 0
+#     max_visible_items = min(
+#         display_count, total_generations_menu_items - start_index_generations_menu
+#     )
 
-    generation_results = fetch_generation_data()
+#     generation_results = fetch_generation_data()
 
-    # Handle wrapping when reaching beginning and end of buffer display
-    if selected_index < start_index_generations_menu:
-        start_index_generations_menu = selected_index
-    elif selected_index >= start_index_generations_menu + max_visible_items:
-        start_index_generations_menu = selected_index - max_visible_items + 1
+#     # Handle wrapping when reaching beginning and end of buffer display
+#     if selected_index < start_index_generations_menu:
+#         start_index_generations_menu = selected_index
+#     elif selected_index >= start_index_generations_menu + max_visible_items:
+#         start_index_generations_menu = selected_index - max_visible_items + 1
 
-    for i in range(max_visible_items):
-        if start_index_generations_menu + i < total_generations_menu_items:
-            generation_name = generation_results[start_index_generations_menu + i].get(
-                "name", ""
-            )
-            display_text = f"{generation_name}"
+#     for i in range(max_visible_items):
+#         if start_index_generations_menu + i < total_generations_menu_items:
+#             generation_name = generation_results[start_index_generations_menu + i].get(
+#                 "name", ""
+#             )
+#             display_text = f"{generation_name}"
 
-            if start_index_generations_menu + i == selected_index:
-                display_text = f"# {display_text}"
+#             if start_index_generations_menu + i == selected_index:
+#                 display_text = f"# {display_text}"
 
-            draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
+#             draw_generations_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-    disp.image(buffer_generations_menu)
-    disp.show()
+#     disp.image(buffer_generations_menu)
+#     disp.show()
 
 
 def update_display_generation_i_menu(selected_index):

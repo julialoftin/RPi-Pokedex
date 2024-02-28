@@ -3,6 +3,10 @@
 from PIL import Image, ImageDraw
 from buttons_and_board import disp
 
+def clear_buffer(buffer, draw):
+    """Clears screen for drawing"""
+    draw.rectangle((0, 0, buffer.width, buffer.height), outline=0, fill=0)
+
 # Create an off-screen buffer and drawing object for Main Menu
 buffer_main_menu = Image.new("1", (disp.width, disp.height))
 draw_main_menu = ImageDraw.Draw(buffer_main_menu)
