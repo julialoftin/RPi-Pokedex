@@ -75,7 +75,7 @@ from fetch_api_data import (
 
 
 # API URLs
-GENERATION_API_URL = "https://pokeapi.co/api/v2/generation"
+# GENERATION_API_URL = "https://pokeapi.co/api/v2/generation"
 
 # Define states
 MAIN_MENU_STATE = 0
