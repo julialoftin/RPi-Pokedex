@@ -1,6 +1,15 @@
 """ Contains all update display functions """
 
+from buffer_and_drawing_objects import (
+    clear_buffer,
+    disp,
+    buffer_generations_menu,
+    draw_generations_menu,
+)
 
+from pokedex import total_generations_menu_items
+
+from fetch_api_data import fetch_generation_data
 
 def update_display_generations_menu(selected_index):
     """Creates generations menu display"""

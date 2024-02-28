@@ -12,11 +12,13 @@ from buttons_and_board import (
 
 from buffer_and_drawing_objects import (
 
+    clear_buffer,
+
     buffer_main_menu,
     draw_main_menu,
 
-    buffer_generations_menu,
-    draw_generations_menu,
+    # buffer_generations_menu,
+    # draw_generations_menu,
 
     buffer_generation_i_menu,
     draw_generation_i_menu,
@@ -72,6 +74,8 @@ from fetch_api_data import (
     fetch_generation_viii_data,
     fetch_generation_ix_data
 )
+
+from update_display_functions import update_display_generations_menu
 
 
 # Define states
