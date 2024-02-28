@@ -15,20 +15,20 @@ from buffer_and_drawing_objects import (
     clear_buffer,
     # buffer_generation_ii_menu,
     # draw_generation_ii_menu,
-    buffer_generation_iii_menu,
-    draw_generation_iii_menu,
-    buffer_generation_iv_menu,
-    draw_generation_iv_menu,
-    buffer_generation_v_menu,
-    draw_generation_v_menu,
-    buffer_generation_vi_menu,
-    draw_generation_vi_menu,
-    buffer_generation_vii_menu,
-    draw_generation_vii_menu,
-    buffer_generation_viii_menu,
-    draw_generation_viii_menu,
-    buffer_generation_ix_menu,
-    draw_generation_ix_menu,
+    # buffer_generation_iii_menu,
+    # draw_generation_iii_menu,
+    # buffer_generation_iv_menu,
+    # draw_generation_iv_menu,
+    # buffer_generation_v_menu,
+    # draw_generation_v_menu,
+    # buffer_generation_vi_menu,
+    # draw_generation_vi_menu,
+    # buffer_generation_vii_menu,
+    # draw_generation_vii_menu,
+    # buffer_generation_viii_menu,
+    # draw_generation_viii_menu,
+    # buffer_generation_ix_menu,
+    # draw_generation_ix_menu,
     buffer_generation_i_main_region_menu,
     draw_generation_i_main_region_menu,
     buffer_generation_ii_main_region_menu,
@@ -70,7 +70,14 @@ from update_display_functions import (
     update_display_main_menu,
     update_display_generations_menu,
     update_display_generation_i_menu,
-    update_display_generation_ii_menu
+    update_display_generation_ii_menu,
+    update_display_generation_iii_menu,
+    update_display_generation_iv_menu,
+    update_display_generation_v_menu,
+    update_display_generation_vi_menu,
+    update_display_generation_vii_menu,
+    update_display_generation_viii_menu,
+    update_display_generation_ix_menu
 )
 
 
@@ -107,13 +114,13 @@ CURRENT_STATE = MAIN_MENU_STATE
 # START_INDEX_GENERATIONS_MENU = 0
 # START_INDEX_GENERATION_I_MENU = 0
 # START_INDEX_GENERATION_II_MENU = 0
-START_INDEX_GENERATION_III_MENU = 0
-START_INDEX_GENERATION_IV_MENU = 0
-START_INDEX_GENERATION_V_MENU = 0
-START_INDEX_GENERATION_VI_MENU = 0
-START_INDEX_GENERATION_VII_MENU = 0
-START_INDEX_GENERATION_VIII_MENU = 0
-START_INDEX_GENERATION_IX_MENU = 0
+# START_INDEX_GENERATION_III_MENU = 0
+# START_INDEX_GENERATION_IV_MENU = 0
+# START_INDEX_GENERATION_V_MENU = 0
+# START_INDEX_GENERATION_VI_MENU = 0
+# START_INDEX_GENERATION_VII_MENU = 0
+# START_INDEX_GENERATION_VIII_MENU = 0
+# START_INDEX_GENERATION_IX_MENU = 0
 
 START_INDEX_GENERATION_I_MAIN_REGION_MENU = 0
 START_INDEX_GENERATION_II_MAIN_REGION_MENU = 0
@@ -128,12 +135,12 @@ START_INDEX_GENERATION_IX_MAIN_REGION_MENU = 0
 START_INDEX_GENERATION_I_MOVES_MENU = 0
 
 
-# def update_display_generation_ii_menu(selected_index):
-#     """Creates generation 2 menu display"""
-#     clear_buffer(buffer_generation_ii_menu, draw_generation_ii_menu)
-#     draw_generation_ii_menu.text((0, 0), "Generation II:", fill=1)
+# def update_display_generation_iii_menu(selected_index):
+#     """Creates generation 3 menu display"""
+#     clear_buffer(buffer_generation_iii_menu, draw_generation_iii_menu)
+#     draw_generation_iii_menu.text((0, 0), "Generation III:", fill=1)
 
-#     generation_ii_menu_items = [
+#     generation_iii_menu_items = [
 #         "Main Region",
 #         "Moves",
 #         "Pokemon Species",
@@ -141,191 +148,166 @@ START_INDEX_GENERATION_I_MOVES_MENU = 0
 #         "Game Versions",
 #     ]
 
-#     for i, item in enumerate(generation_ii_menu_items):
+#     for i, item in enumerate(generation_iii_menu_items):
 #         display_text = item
 
-#         if i + START_INDEX_GENERATION_II_MENU == selected_index:
+#         if i + START_INDEX_GENERATION_III_MENU == selected_index:
 #             display_text = f"# {display_text}"
 
-#         draw_generation_ii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+#         draw_generation_iii_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-#     disp.image(buffer_generation_ii_menu)
+#     disp.image(buffer_generation_iii_menu)
 #     disp.show()
 
 
-def update_display_generation_iii_menu(selected_index):
-    """Creates generation 3 menu display"""
-    clear_buffer(buffer_generation_iii_menu, draw_generation_iii_menu)
-    draw_generation_iii_menu.text((0, 0), "Generation III:", fill=1)
+# def update_display_generation_iv_menu(selected_index):
+#     """Creates generation 4 menu display"""
+#     clear_buffer(buffer_generation_iv_menu, draw_generation_iv_menu)
+#     draw_generation_iv_menu.text((0, 0), "Generation IV:", fill=1)
 
-    generation_iii_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
+#     generation_iv_menu_items = [
+#         "Main Region",
+#         "Moves",
+#         "Pokemon Species",
+#         "Pokemon Types",
+#         "Game Versions",
+#     ]
 
-    for i, item in enumerate(generation_iii_menu_items):
-        display_text = item
+#     for i, item in enumerate(generation_iv_menu_items):
+#         display_text = item
 
-        if i + START_INDEX_GENERATION_III_MENU == selected_index:
-            display_text = f"# {display_text}"
+#         if i + START_INDEX_GENERATION_IV_MENU == selected_index:
+#             display_text = f"# {display_text}"
 
-        draw_generation_iii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+#         draw_generation_iv_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-    disp.image(buffer_generation_iii_menu)
-    disp.show()
-
-
-def update_display_generation_iv_menu(selected_index):
-    """Creates generation 4 menu display"""
-    clear_buffer(buffer_generation_iv_menu, draw_generation_iv_menu)
-    draw_generation_iv_menu.text((0, 0), "Generation IV:", fill=1)
-
-    generation_iv_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
-
-    for i, item in enumerate(generation_iv_menu_items):
-        display_text = item
-
-        if i + START_INDEX_GENERATION_IV_MENU == selected_index:
-            display_text = f"# {display_text}"
-
-        draw_generation_iv_menu.text((0, (i * 10) + 10), display_text, fill=1)
-
-    disp.image(buffer_generation_iv_menu)
-    disp.show()
+#     disp.image(buffer_generation_iv_menu)
+#     disp.show()
 
 
-def update_display_generation_v_menu(selected_index):
-    """Creates generation 5 menu display"""
-    clear_buffer(buffer_generation_v_menu, draw_generation_v_menu)
-    draw_generation_v_menu.text((0, 0), "Generation V:", fill=1)
+# def update_display_generation_v_menu(selected_index):
+#     """Creates generation 5 menu display"""
+#     clear_buffer(buffer_generation_v_menu, draw_generation_v_menu)
+#     draw_generation_v_menu.text((0, 0), "Generation V:", fill=1)
 
-    generation_v_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
+#     generation_v_menu_items = [
+#         "Main Region",
+#         "Moves",
+#         "Pokemon Species",
+#         "Pokemon Types",
+#         "Game Versions",
+#     ]
 
-    for i, item in enumerate(generation_v_menu_items):
-        display_text = item
+#     for i, item in enumerate(generation_v_menu_items):
+#         display_text = item
 
-        if i + START_INDEX_GENERATION_V_MENU == selected_index:
-            display_text = f"# {display_text}"
+#         if i + START_INDEX_GENERATION_V_MENU == selected_index:
+#             display_text = f"# {display_text}"
 
-        draw_generation_v_menu.text((0, (i * 10) + 10), display_text, fill=1)
+#         draw_generation_v_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-    disp.image(buffer_generation_v_menu)
-    disp.show()
-
-
-def update_display_generation_vi_menu(selected_index):
-    """Creates generation 6 menu display"""
-    clear_buffer(buffer_generation_vi_menu, draw_generation_vi_menu)
-    draw_generation_vi_menu.text((0, 0), "Generation VI:", fill=1)
-
-    generation_vi_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
-
-    for i, item in enumerate(generation_vi_menu_items):
-        display_text = item
-
-        if i + START_INDEX_GENERATION_VI_MENU == selected_index:
-            display_text = f"# {display_text}"
-
-        draw_generation_vi_menu.text((0, (i * 10) + 10), display_text, fill=1)
-
-    disp.image(buffer_generation_vi_menu)
-    disp.show()
+#     disp.image(buffer_generation_v_menu)
+#     disp.show()
 
 
-def update_display_generation_vii_menu(selected_index):
-    """Creates generation 7 menu display"""
-    clear_buffer(buffer_generation_vii_menu, draw_generation_vii_menu)
-    draw_generation_vii_menu.text((0, 0), "Generation VII:", fill=1)
+# def update_display_generation_vi_menu(selected_index):
+#     """Creates generation 6 menu display"""
+#     clear_buffer(buffer_generation_vi_menu, draw_generation_vi_menu)
+#     draw_generation_vi_menu.text((0, 0), "Generation VI:", fill=1)
 
-    generation_vii_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
+#     generation_vi_menu_items = [
+#         "Main Region",
+#         "Moves",
+#         "Pokemon Species",
+#         "Pokemon Types",
+#         "Game Versions",
+#     ]
 
-    for i, item in enumerate(generation_vii_menu_items):
-        display_text = item
+#     for i, item in enumerate(generation_vi_menu_items):
+#         display_text = item
 
-        if i + START_INDEX_GENERATION_VII_MENU == selected_index:
-            display_text = f"# {display_text}"
+#         if i + START_INDEX_GENERATION_VI_MENU == selected_index:
+#             display_text = f"# {display_text}"
 
-        draw_generation_vii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+#         draw_generation_vi_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-    disp.image(buffer_generation_vii_menu)
-    disp.show()
-
-
-def update_display_generation_viii_menu(selected_index):
-    """Creates generation 8 menu display"""
-    clear_buffer(buffer_generation_viii_menu, draw_generation_viii_menu)
-    draw_generation_viii_menu.text((0, 0), "Generation VIII:", fill=1)
-
-    generation_viii_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
-
-    for i, item in enumerate(generation_viii_menu_items):
-        display_text = item
-
-        if i + START_INDEX_GENERATION_VIII_MENU == selected_index:
-            display_text = f"# {display_text}"
-
-        draw_generation_viii_menu.text((0, (i * 10) + 10), display_text, fill=1)
-
-    disp.image(buffer_generation_viii_menu)
-    disp.show()
+#     disp.image(buffer_generation_vi_menu)
+#     disp.show()
 
 
-def update_display_generation_ix_menu(selected_index):
-    """Creates generation 9 menu display"""
-    clear_buffer(buffer_generation_ix_menu, draw_generation_ix_menu)
-    draw_generation_ix_menu.text((0, 0), "Generation IX:", fill=1)
+# def update_display_generation_vii_menu(selected_index):
+#     """Creates generation 7 menu display"""
+#     clear_buffer(buffer_generation_vii_menu, draw_generation_vii_menu)
+#     draw_generation_vii_menu.text((0, 0), "Generation VII:", fill=1)
 
-    generation_ix_menu_items = [
-        "Main Region",
-        "Moves",
-        "Pokemon Species",
-        "Pokemon Types",
-        "Game Versions",
-    ]
+#     generation_vii_menu_items = [
+#         "Main Region",
+#         "Moves",
+#         "Pokemon Species",
+#         "Pokemon Types",
+#         "Game Versions",
+#     ]
 
-    for i, item in enumerate(generation_ix_menu_items):
-        display_text = item
+#     for i, item in enumerate(generation_vii_menu_items):
+#         display_text = item
 
-        if i + START_INDEX_GENERATION_IX_MENU == selected_index:
-            display_text = f"# {display_text}"
+#         if i + START_INDEX_GENERATION_VII_MENU == selected_index:
+#             display_text = f"# {display_text}"
 
-        draw_generation_ix_menu.text((0, (i * 10) + 10), display_text, fill=1)
+#         draw_generation_vii_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
-    disp.image(buffer_generation_ix_menu)
-    disp.show()
+#     disp.image(buffer_generation_vii_menu)
+#     disp.show()
+
+
+# def update_display_generation_viii_menu(selected_index):
+#     """Creates generation 8 menu display"""
+#     clear_buffer(buffer_generation_viii_menu, draw_generation_viii_menu)
+#     draw_generation_viii_menu.text((0, 0), "Generation VIII:", fill=1)
+
+#     generation_viii_menu_items = [
+#         "Main Region",
+#         "Moves",
+#         "Pokemon Species",
+#         "Pokemon Types",
+#         "Game Versions",
+#     ]
+
+#     for i, item in enumerate(generation_viii_menu_items):
+#         display_text = item
+
+#         if i + START_INDEX_GENERATION_VIII_MENU == selected_index:
+#             display_text = f"# {display_text}"
+
+#         draw_generation_viii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+#     disp.image(buffer_generation_viii_menu)
+#     disp.show()
+
+
+# def update_display_generation_ix_menu(selected_index):
+#     """Creates generation 9 menu display"""
+#     clear_buffer(buffer_generation_ix_menu, draw_generation_ix_menu)
+#     draw_generation_ix_menu.text((0, 0), "Generation IX:", fill=1)
+
+#     generation_ix_menu_items = [
+#         "Main Region",
+#         "Moves",
+#         "Pokemon Species",
+#         "Pokemon Types",
+#         "Game Versions",
+#     ]
+
+#     for i, item in enumerate(generation_ix_menu_items):
+#         display_text = item
+
+#         if i + START_INDEX_GENERATION_IX_MENU == selected_index:
+#             display_text = f"# {display_text}"
+
+#         draw_generation_ix_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+#     disp.image(buffer_generation_ix_menu)
+#     disp.show()
 
 
 def update_display_generation_i_main_region_menu(selected_index):
