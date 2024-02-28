@@ -9,6 +9,8 @@ from buffer_and_drawing_objects import (
     draw_main_menu,
     buffer_generation_i_menu,
     draw_generation_i_menu,
+    buffer_generation_ii_menu,
+    draw_generation_ii_menu,
 )
 
 from fetch_api_data import fetch_generation_data
@@ -88,4 +90,28 @@ def update_display_generation_i_menu(selected_index):
         draw_generation_i_menu.text((0, (i * 10) + 10), display_text, fill=1)
 
     disp.image(buffer_generation_i_menu)
+    disp.show()
+
+def update_display_generation_ii_menu(selected_index):
+    """Creates generation 2 menu display"""
+    clear_buffer(buffer_generation_ii_menu, draw_generation_ii_menu)
+    draw_generation_ii_menu.text((0, 0), "Generation II:", fill=1)
+
+    generation_ii_menu_items = [
+        "Main Region",
+        "Moves",
+        "Pokemon Species",
+        "Pokemon Types",
+        "Game Versions",
+    ]
+
+    for i, item in enumerate(generation_ii_menu_items):
+        display_text = item
+
+        if i == selected_index:
+            display_text = f"# {display_text}"
+
+        draw_generation_ii_menu.text((0, (i * 10) + 10), display_text, fill=1)
+
+    disp.image(buffer_generation_ii_menu)
     disp.show()
