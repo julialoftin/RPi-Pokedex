@@ -9,7 +9,7 @@ def fetch_generation_data():
         response = requests.get(GENERATION_API_URL)
         if response.status_code == 200:
             generation_data = response.json().get("results", [])
-            return generation_data
+            return generation_data, generation_data.length
         print(f"Failed to get Generations data. Status code: {response.status_code}")
         return None
     except requests.exceptions.RequestException as e:

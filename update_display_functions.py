@@ -7,14 +7,14 @@ from buffer_and_drawing_objects import (
     draw_generations_menu,
 )
 
-from pokedex import total_generations_menu_items
-
 from fetch_api_data import fetch_generation_data
 
 def update_display_generations_menu(selected_index):
     """Creates generations menu display"""
     clear_buffer(buffer_generations_menu, draw_generations_menu)
     draw_generations_menu.text((0, 0), "Generations:", fill=1)
+
+    generation_results, total_generations_menu_items = fetch_generation_data()
 
     display_count = 5
     # total_generations_menu_items = len(fetch_generation_data())
@@ -23,7 +23,7 @@ def update_display_generations_menu(selected_index):
         display_count, total_generations_menu_items - start_index_generations_menu
     )
 
-    generation_results = fetch_generation_data()
+    # generation_results = fetch_generation_data()
 
     # Handle wrapping when reaching beginning and end of buffer display
     if selected_index < start_index_generations_menu:

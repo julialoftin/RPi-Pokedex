@@ -830,7 +830,8 @@ while True:
 
     if CURRENT_STATE == GENERATIONS_MENU_STATE:
         SELECTED_INDEX_GENERATIONS_MENU = 0
-        total_generations_menu_items = len(fetch_generation_data())
+        # total_generations_menu_items = len(fetch_generation_data())
+        data, total_generations_menu_items = fetch_generation_data()
         update_display_generations_menu(SELECTED_INDEX_GENERATIONS_MENU)
 
         while True:
